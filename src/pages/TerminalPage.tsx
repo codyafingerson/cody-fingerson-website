@@ -1,4 +1,3 @@
-// TerminalPage.tsx
 import { useState } from "react";
 import { bubbleSortDemo } from "../utils/bubbleSort";
 import { fibonacci } from "../utils/fibonacci"; // Assuming you already have the fibonacci utility
