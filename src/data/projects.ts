@@ -15,7 +15,7 @@ const projects = [
         title: "Insight ERP",
         description:
             "Currently in active development, Insight ERP is a full-stack ERP system designed for small to medium-sized businesses. Built using Next.js, MySQL, and TypeScript, it offers a simple and user-friendly interface to manage business operations efficiently.",
-        link: "https://github.com/yourgithub/project-three",
+        link: "https://github.com/codyafingerson/insight-erp",
     },
 ];
 
