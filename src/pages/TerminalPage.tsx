@@ -107,6 +107,7 @@ export default function TerminalPage() {
     <div className="min-h-screen flex flex-col justify-between bg-black text-white">
       <div className="w-full max-w-4xl mx-auto p-4 flex-grow">
         <h1 className="text-3xl font-bold text-center mb-4">Terminal</h1>
+        <p className="text-center text-gray-400 mb-4">Type <code>help</code> to see available commands</p>
         <div className="bg-gray-900 p-4 rounded-md shadow-lg h-96 overflow-y-auto">
           {/* Output Section */}
           <TerminalOutput output={output} />
