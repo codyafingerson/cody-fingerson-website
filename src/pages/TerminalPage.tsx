@@ -25,7 +25,7 @@ export default function TerminalPage() {
       case "projects":
         response = (
           <div>
-            Check out my projects:
+            <h2>My Projects:</h2>
             <ul>
               <li>
                 <a
