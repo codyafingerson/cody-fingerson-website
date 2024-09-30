@@ -8,7 +8,7 @@ export default function IndexPage() {
         <div className="flex-shrink-0">
           <img
             src="/headshot.jpg"
-            alt="Person's Headshot"
+            alt="Headshot of Cody"
             className="relative rounded-full h-48 w-48 md:h-80 md:w-80 shadow-md object-cover before:content-[''] before:absolute before:inset-0 before:rounded-full before:bg-black/20 before:-z-10 before:blur-lg"
           />
         </div>
