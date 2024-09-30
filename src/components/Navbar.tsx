@@ -31,6 +31,14 @@ export default function Navbar() {
           >
             Experience
           </Link>
+          <Link
+            to="/terminal"
+            className={`${isActive(
+              "/terminal"
+            )} hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-yellow-400 hover:via-red-500 hover:to-pink-500`}
+          >
+            Terminal
+          </Link>
         </div>
       </div>
     </nav>
