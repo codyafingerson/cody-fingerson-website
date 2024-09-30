@@ -23,40 +23,7 @@ export default function TerminalPage() {
           "I'm Cody Fingerson, a software engineer passionate about coding!";
         break;
       case "projects":
-        response = (
-          <div>
-            <h2>My Projects:</h2>
-            <ul>
-              <li>
-                <a
-                  href="https://github.com/codyafingerson/hrdc-app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  HRDC Homeless Warming Center Software
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/codyafingerson/StateBorderGraph"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  State Border Graph
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/codyafingerson/insight-erp"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Insight ERP
-                </a>
-              </li>
-            </ul>
-          </div>
-        );
+        response = `Check out my projects! HRDC Homeless Warming Center Software, State Border Graph, Insight ERP`;
         break;
       case "help":
         response =
