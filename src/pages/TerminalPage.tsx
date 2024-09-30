@@ -1,8 +1,8 @@
 import { useState } from "react";
+import TerminalInput from "../components/TerminalInput";
+import TerminalOutput from "../components/TerminalOutput";
 import { bubbleSortDemo } from "../utils/bubbleSort";
 import { fibonacci } from "../utils/fibonacci"; // Assuming you already have the fibonacci utility
-import TerminalOutput from "../components/TerminalOutput";
-import TerminalInput from "../components/TerminalInput";
 
 export default function TerminalPage() {
   const [output, setOutput] = useState<string[]>([]); // explicitly define output as array of strings
@@ -100,14 +100,20 @@ export default function TerminalPage() {
         response = `Command not recognized: ${input}`;
     }
 
-    setOutput((prevOutput) => [...prevOutput, `> ${input}`, response]); // update output with the new command and response
+    setOutput((prevOutput) => {
+      const newOutput = [...prevOutput, `> ${input}`];
+      const typedResponse = String(response); // Typecast response to string
+      return [...newOutput, typedResponse];
+    }); // update output with the new command and response
   };
 
   return (
     <div className="min-h-screen flex flex-col justify-between bg-black text-white">
       <div className="w-full max-w-4xl mx-auto p-4 flex-grow">
         <h1 className="text-3xl font-bold text-center mb-4">Terminal</h1>
-        <p className="text-center text-gray-400 mb-4">Type <code>help</code> to see available commands</p>
+        <p className="text-center text-gray-400 mb-4">
+          Type <code>help</code> to see available commands
+        </p>
         <div className="bg-gray-900 p-4 rounded-md shadow-lg h-96 overflow-y-auto">
           {/* Output Section */}
           <TerminalOutput output={output} />
