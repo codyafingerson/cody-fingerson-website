@@ -1,24 +1,26 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-
-// Global components
-import Navbar from "./components/Navbar"
-
-// Pages
-import IndexPage from "./pages/IndexPage"
-import ProjectsPage from "./pages/ProjectsPage"
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Footer } from "./components/Footer";
+import Navbar from "./components/Navbar";
+import CatchAll from "./pages/CatchAll";
 import ExperiencePage from "./pages/ExperiencePage";
-import CatchAll from "./pages/CatchAll"
+import IndexPage from "./pages/IndexPage";
+import ProjectsPage from "./pages/ProjectsPage";
 
 export default function App() {
   return (
     <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<IndexPage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/experience" element={<ExperiencePage />} />
-        <Route path="*" element={<CatchAll />} />
-      </Routes>
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <div className="flex-grow">
+          <Routes>
+            <Route path="/" element={<IndexPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/experience" element={<ExperiencePage />} />
+            <Route path="*" element={<CatchAll />} />
+          </Routes>
+        </div>
+        <Footer />
+      </div>
     </Router>
   );
 }
