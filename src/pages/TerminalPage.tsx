@@ -12,7 +12,7 @@ export default function TerminalPage() {
 
   // Function to handle user input and process commands
   const handleCommand = (input: string) => {
-    let response: string; // explicitly define response as a string
+    let response; // explicitly define response as a string
     const inputParts = input.trim().toLowerCase().split(" "); // Split input by spaces
     const command = inputParts[0]; // Extract command (e.g., 'fibonacci')
     const argument = inputParts[1]; // Extract argument (e.g., '10' for 'fibonacci 10')
@@ -23,7 +23,40 @@ export default function TerminalPage() {
           "I'm Cody Fingerson, a software engineer passionate about coding!";
         break;
       case "projects":
-        response = `Check out my projects: HRDC Homeless Warming Center Software, State Border Graph, Insight ERP.`;
+        response = (
+          <div>
+            Check out my projects:
+            <ul>
+              <li>
+                <a
+                  href="https://github.com/codyafingerson/hrdc-app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  HRDC Homeless Warming Center Software
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/codyafingerson/StateBorderGraph"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  State Border Graph
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/codyafingerson/insight-erp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Insight ERP
+                </a>
+              </li>
+            </ul>
+          </div>
+        );
         break;
       case "help":
         response =
