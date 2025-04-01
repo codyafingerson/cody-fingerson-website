@@ -3,8 +3,18 @@ const experiences = [
         company: "AdvicePay",
         roles: [
             {
+                title: "IT Technician",
+                date: "January 2025 - Present",
+                description: `
+                All roles from Intern role, plus:
+                Managing Google WorkSpace, including user account management, email configuration, and security settings.
+                Creating knowledge base articles and documentation for internal processes, enhancing team efficiency and knowledge sharing.
+                Collaborating with the Security team to implement security measures, including multi-factor authentication and data encryption, to protect sensitive information.
+                `
+            },
+            {
                 title: "Information Technology Intern",
-                date: "May 2024 - Present",
+                date: "May 2024 - December 2024",
                 description: `
                 Assisted the system administrator in managing a fleet of Mac laptops using Mobile Device Management (MDM) software, ensuring efficient deployment, configuration, and updates for all devices.
                 Developed and maintained internal documentation and IT processes to streamline the deployment and management of devices, improving efficiency and reducing response time for common issues.
