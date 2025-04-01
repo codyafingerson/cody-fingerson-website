@@ -23,7 +23,7 @@ export default function CosmoInterpreterPage() {
         <li>A custom syntax (see below)</li>
         <li>Basic arithmetic operations: addition, subtraction, multiplication, and division.</li>
         <li>Variable assignment and retrieval.</li>
-        <li>A basic standard library of `add(x, y) and sqrt(x)</li>
+        <li>A very simple standard library of <code>add(x, y)</code> and <code>sqrt(x)</code></li>
       </ul>
       <h2 className="mt-8 text-2xl font-bold text-gray-900 dark:text-gray-100">
         Conclusion
