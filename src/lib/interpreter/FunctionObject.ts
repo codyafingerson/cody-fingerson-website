@@ -21,7 +21,7 @@ export class FunctionObject extends Callable {
         return this.declaration.params.length;
     }
 
-    public call(interpreter: Interpreter, args: any[]): any {
+    public call(args: any[], interpreter: Interpreter, ): any {
         const environment = new Environment(this.closure);
         for (let i = 0; i < this.declaration.params.length; i++) {
             environment.define(this.declaration.params[i].lexeme, args[i]);

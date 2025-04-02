@@ -15,5 +15,5 @@ export abstract class Callable {
      * @param interpreter the interpreter instance
      * @param args the arguments to pass to the function
      */
-    abstract call(interpreter: Interpreter, args: any[]): any;
+    abstract call(args: any[], interpreter?: Interpreter): any;
 }

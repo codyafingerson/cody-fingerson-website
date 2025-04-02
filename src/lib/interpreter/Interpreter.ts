@@ -204,7 +204,7 @@ export class Interpreter {
                 throw new Error(`Expected ${func.arity()} arguments but got ${args.length}.`);
             }
     
-            return func.call(this, args);
+            return func.call(args, this);
         } else if (expr instanceof LogicalExpression) {
             return this.evaluateLogical(expr);
         } else {
