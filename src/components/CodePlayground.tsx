@@ -96,7 +96,7 @@ const CodePlayground: React.FC<CodePlaygroundProps> = ({
         {isRunningCode ? 'Running...' : runButtonText}
       </button>
       {output && (
-        <pre className="mt-4 p-4 bg-black text-green-400 font-mono overflow-auto whitespace-pre-wrap break-words">
+        <pre className="mt-4 p-4 bg-black text-green-400 font-mono overflow-auto whitespace-pre-wrap break-words max-h-64">
           {output}
         </pre>
       )}
