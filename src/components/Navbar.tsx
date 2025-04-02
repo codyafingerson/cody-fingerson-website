@@ -1,12 +1,17 @@
 import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
-  const location = useLocation(); // Get the current location
+  const location = useLocation();
 
   const isActive = (path: string) =>
     location.pathname === path
       ? "text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500"
       : "text-slate-800 dark:text-white";
+
+  // Commented out for future use
+  // const activeClass = "text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500";
+  // const inactiveClass = "text-slate-800 dark:text-white";
+  // const hoverClass = "hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-yellow-400 hover:via-red-500 hover:to-pink-500";
 
   return (
     <nav className="bg-white dark:bg-slate-800 p-6">
@@ -32,6 +37,14 @@ export default function Navbar() {
             Experience
           </Link>
           <Link
+            to="/skills"
+            className={`${isActive(
+              "/skills"
+            )} hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-yellow-400 hover:via-red-500 hover:to-pink-500`}
+          >
+            Skills
+          </Link>
+          <Link
             to="/terminal"
             className={`${isActive(
               "/terminal"
@@ -39,36 +52,14 @@ export default function Navbar() {
           >
             Terminal
           </Link>
-          <div className="relative group inline-block">
-            <Link
-              to="/interpreter"
-              className={`${isActive(
-                "/interpreter"
-              )} inline-block hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-yellow-400 hover:via-red-500 hover:to-pink-500`}
-            >
-              Interpreter
-            </Link>
-            <div className="absolute left-0 mt-2 w-32 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-              <Link
-                to="/interpreter/lexer"
-                className="block px-4 py-2 text-slate-800 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700"
-              >
-                Lexer
-              </Link>
-              <Link
-                to="/interpreter/parser"
-                className="block px-4 py-2 text-slate-800 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700"
-              >
-                Parser
-              </Link>
-              <Link
-                to="/interpreter/execution"
-                className="block px-4 py-2 text-slate-800 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700"
-              >
-                Execution
-              </Link>
-            </div>
-          </div>
+          <Link
+            to="/interpreter"
+            className={`${isActive(
+              "/interpreter"
+            )} hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-yellow-400 hover:via-red-500 hover:to-pink-500`}
+          >
+            Interpreter
+          </Link>
         </div>
       </div>
     </nav>

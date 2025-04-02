@@ -1,7 +1,7 @@
 import 'github-markdown-css';
 import ReactMarkdown from "react-markdown";
-import Container from "../components/Container";
-import { cosmoEBNF } from "../interpreter/ebnf";
+import Container from '../../components/Container';
+import { cosmoEBNF } from '../../lib/ebnf';
 
 export default function CosmoInterpreterPage() {
   return (

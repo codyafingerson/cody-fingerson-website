@@ -16,7 +16,8 @@ export default function ProjectsPage() {
               key={index}
               title={project.title}
               description={project.description}
-              link={project.link}
+              sourceCodeLink={project.sourceCodeLink}
+              projectLink={project.projectLink}
             />
           ))}
         </div>
