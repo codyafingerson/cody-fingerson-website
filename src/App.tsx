@@ -5,7 +5,13 @@ import CatchAll from "./pages/CatchAll";
 import ExperiencePage from "./pages/ExperiencePage";
 import IndexPage from "./pages/IndexPage";
 import ProjectsPage from "./pages/ProjectsPage";
+import SkillsPage from "./pages/SkillsPage";
 import TerminalPage from "./pages/TerminalPage";
+import CosmoInterpreterPage from "./pages/Interpreter/CosmoInterpreterPage";
+import LexerPage from "./pages/Interpreter/LexerPage";
+import ParserPage from "./pages/Interpreter/ParserPage";
+import RuntimePage from "./pages/Interpreter/RuntimePage";
+import InterpreterLayout from "./components/InterpreterLayout";
 
 export default function App() {
   return (
@@ -17,7 +23,16 @@ export default function App() {
             <Route path="/" element={<IndexPage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/experience" element={<ExperiencePage />} />
+            <Route path="/skills" element={<SkillsPage />} />
             <Route path="/terminal" element={<TerminalPage />} />
+            <Route path="/interpreter" element={<InterpreterLayout />}>
+              <Route index element={<CosmoInterpreterPage />} /> {/* Default page at /interpreter */}
+              <Route path="lexer" element={<LexerPage />} />
+              <Route path="parser" element={<ParserPage />} />
+              <Route path="runtime" element={<RuntimePage />} />
+            </Route>
+
+            {/* Catch-all route for 404 pages */}
             <Route path="*" element={<CatchAll />} />
           </Routes>
         </div>

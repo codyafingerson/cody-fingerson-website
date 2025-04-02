@@ -1,5 +1,6 @@
 export type Project = {
     title: string;
     description: string;
-    link: string;
+    sourceCodeLink: string;
+    projectLink?: string;
 };

@@ -19,26 +19,40 @@ export default function IndexPage() {
             Hello, I'm Cody!
           </h1>
           <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-            I'm a passionate Computer Science student with a love for
-            technology, coding, and software engineering. Currently studying in
-            Bozeman, Montana, I have a knack for problem-solving and enjoy
-            exploring innovative software solutions. During my time as a
-            student, I’ve had the opportunity to intern as a software engineer,
-            which further fueled my passion for creating efficient and impactful
-            applications. I'm committed to continuous learning and thrive when
-            tackling challenges.
+            Driven by a passion for technology and a commitment to creating
+            impactful solutions, I'm a Computer Science student with a unique
+            blend of technical and interpersonal skills. My journey has taken me
+            from hands-on electromechanical work and pharmacy technology to
+            software engineering and IT, providing me with a diverse perspective
+            and a robust problem-solving toolkit.
           </p>
           <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-            As a proud member of the LGBTQ community, I’m dedicated to promoting
+            My experiences at Wavelength Electronics, Inc., allowed me to develop
+            and implement software solutions for complex calibration processes,
+            while my IT roles at AdvicePay have honed my skills in system
+            administration, automation, and technical support. I'm proficient in
+            scripting with Bash, managing MDM systems, and ensuring seamless
+            technology experiences for teams. My background in pharmacy
+            technology has also instilled in me a strong sense of attention to
+            detail and a commitment to compliance, particularly regarding
+            sensitive data.
+          </p>
+          <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            Currently pursuing my Computer Science degree in Bozeman, Montana,
+            I'm dedicated to continuous learning and exploring innovative
+            software solutions. I thrive in collaborative environments and am
+            passionate about optimizing workflows and improving team efficiency.
+          </p>
+          <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            As a member of the LGBTQ+ community, I'm committed to fostering
             inclusivity within the tech industry, striving to create spaces
-            where everyone feels represented.
+            where everyone feels represented and valued.
           </p>
           <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-            When I’m not coding, I enjoy spending time with my family, playing
-            video games, or hanging out with my friends. I also make it a point
-            to learn something new every day, whether it’s related to tech or
-            something completely different, embracing growth in all areas of
-            life.
+            Outside of coding, I enjoy photography, experimenting with
+            espresso, and spending quality time with friends, my partner, and my
+            dog. I believe in embracing growth in all areas of life and am
+            always eager to learn something new.
           </p>
         </div>
       </div>
