@@ -48,7 +48,7 @@ func main() {
   output(str);
 
   // Null literal
-  create nullVar = null;
+  create nullVar = nil;
   output(nullVar);
 
   // Parenthesized expression
