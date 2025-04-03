@@ -1,19 +1,19 @@
 import { Interpreter } from "./Interpreter";
 
-/**
- * A callable object that can be invoked in the interpreter.
- * @abstract
- */
 export abstract class Callable {
-    /**
-     * The number of arguments the function expects.
-     */
     abstract arity(): number;
 
     /**
-     * Invokes the function with the given arguments.
-     * @param interpreter the interpreter instance
-     * @param args the arguments to pass to the function
+     * Executes the callable's logic.
+     * @param interpreter The interpreter instance, used for context if needed.
+     * @param args The arguments passed to the callable.
+     * @returns The result of the call.
+     * @throws {RuntimeError} If a runtime error occurs during the call.
      */
-    abstract call(args: any[], interpreter?: Interpreter): any;
+    abstract call(interpreter: Interpreter, args: unknown[]): unknown;
+
+    /**
+     * Returns a string representation of the callable.
+     */
+    abstract toString(): string;
 }

@@ -1,49 +1,66 @@
 import type { Token } from "../scanner/Token";
+import { RuntimeError } from "./RuntimeError";
 
 /**
- * The environment class is used to store variables and their values.
+ * Manages variable scopes and their values during interpretation.
+ * Supports nested scopes for blocks and functions.
  */
 export class Environment {
-    private values: Map<string, any> = new Map();
+    readonly enclosing: Environment | null;
+    private readonly values: Map<string, unknown> = new Map();
 
-    constructor(private enclosing: Environment | null = null) {}
+    constructor(enclosing: Environment | null = null) {
+        this.enclosing = enclosing;
+    }
 
     /**
-     * Defines a variable in the environment.
-     * @param name the name of the variable
-     * @param value the value associated with the variable
+     * Defines a new variable in the *current* environment.
+     * If the variable already exists in the current environment, it's effectively reassigned.
+     * @param name The variable name (string lexeme).
+     * @param value The initial value.
      */
-    public define(name: string, value: any): void {
+    public define(name: string, value: unknown): void {
         this.values.set(name, value);
     }
 
     /**
-     * Retrieves the value of a variable from the environment.
-     * @param name the name of the variable
-     * @returns the value of the variable
+     * Retrieves the value of a variable, searching the current environment
+     * and then enclosing environments.
+     * @param name The token representing the variable name (used for error reporting).
+     * @returns The value of the variable.
+     * @throws {RuntimeError} If the variable is not defined.
      */
-    public get(name: Token): any {
+    public get(name: Token): unknown {
         if (this.values.has(name.lexeme)) {
-            return this.values.get(name.lexeme);
-        } else if (this.enclosing !== null) {
-            return this.enclosing.get(name);
-        } else {
-            throw new Error(`Undefined variable '${name.lexeme}'.`);
+            // Ensure value is not undefined before returning (though Map shouldn't store undefined for existing keys)
+            return this.values.get(name.lexeme) ?? null;
         }
+
+        if (this.enclosing !== null) {
+            return this.enclosing.get(name);
+        }
+
+        throw new RuntimeError(name, `Undefined variable '${name.lexeme}'.`);
     }
 
     /**
-     * Assigns a value to a variable in the environment.
-     * @param name the name of the variable
-     * @param value the value to assign to the variable
+     * Assigns a new value to an *existing* variable, searching the current environment
+     * and then enclosing environments.
+     * @param name The token representing the variable name.
+     * @param value The new value to assign.
+     * @throws {RuntimeError} If the variable is not defined in any accessible scope.
      */
-    public assign(name: Token, value: any): void {
+    public assign(name: Token, value: unknown): void {
         if (this.values.has(name.lexeme)) {
             this.values.set(name.lexeme, value);
-        } else if (this.enclosing !== null) {
-            this.enclosing.assign(name, value);
-        } else {
-            throw new Error(`Undefined variable '${name.lexeme}'.`);
+            return;
         }
+
+        if (this.enclosing !== null) {
+            this.enclosing.assign(name, value);
+            return;
+        }
+
+        throw new RuntimeError(name, `Undefined variable '${name.lexeme}' for assignment.`);
     }
 }

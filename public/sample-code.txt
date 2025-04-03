@@ -1,59 +1,249 @@
-// The main function of the program
-func main() {
-  // Variable declaration and arithmetic expressions
-  create x = 10;
-  create y = 5;
-  create z = x * y + (x - y);
+// ================================
+// Cosmo Language Comprehensive Test
+// ================================
 
-  output(z);
+output("--- Program Start ---");
 
-  create addition = add(x, y);
+// --- Literals and Basic Output ---
+output("--- Testing Literals & Output ---");
+output(123);        // Number (Integer)
+output(98.6);       // Number (Decimal)
+output("Hello, World from Cosmo!"); // String
+output(true);       // Boolean true
+output(false);      // Boolean false
+output(null);       // Null value
+output("");         // Empty String
+// Note: Scanner handles basic \\ and \" escapes
+output("This string has \"quotes\" and a backslash \\ in it.");
 
-  output(addition);
 
-  create squareRoot = sqrt(z);
-  output(squareRoot);
+// --- Variable Declaration, Assignment & Scoping ---
+output("--- Testing Variables & Scopes ---");
+create languageName = "Cosmo";
+output("Language:"); 
+output(languageName);
 
-  // Conditional statement
-  if (x > y) {
-    output("x is greater than y");
-  } else {
-    output("x is not greater than y");
-  }
+languageName = "Cosmo Interpreter"; // Re-assignment
+output("Updated Language:"); output(languageName);
 
-  // Loop
-  create i = 0;
-  while (i < 3) {
-    output(i);
-    i = i + 1;
-  }
+create initialValue = 10;
+output("Initial Value:"); output(initialValue);
 
-  // For loop
-  for (create j = 0; j < 2; j = j + 1) {
-    output(j);
-  }
+{ // Start block scope
+  create initialValue = 20; // Shadow outer variable
+  create innerVar = "I'm inside the block";
+  output("Inner scope initialValue:"); output(initialValue); // Should be 20
+  output(innerVar);
+  languageName = "Cosmo (modified in block)"; // Modify outer scope variable
+} // End block scope
 
-  // Equality and comparison operators
-  output(x == 10);
-  output(y != 5);
-  output(x > y);
-  output(x <= 10);
+output("Outer scope initialValue (after block):"); output(initialValue); // Should be 10 (original restored)
+output("Outer languageName (after block):"); output(languageName); // Check modification
+// output(innerVar); // ERROR: Undefined variable 'innerVar' - Correctly throws if uncommented
 
-  // Unary operators
-  output(-x);
-  output(!false);
+create uninitialized; // Declaration without initializer
+output("Uninitialized variable:"); output(uninitialized); // Should output null
 
-  // String literal
-  create str = "hello";
-  output(str);
 
-  // Null literal
-  create nullVar = nil;
-  output(nullVar);
+// --- Operators ---
+output("--- Testing Operators ---");
+create a = 100;
+create b = 25;
+create c = 4.5;
 
-  // Parenthesized expression
-  create parenResult = (x + y) * 2;
-  output(parenResult);
+// Arithmetic
+output("Arithmetic:");
+output(a + b); // 125
+output(a - b); // 75
+output(a * c); // 450
+output(a / b); // 4
+output(101 / 4); // 25.25 (Floating point division)
+output(a % 7); // 2 (100 / 7 = 14 remainder 2)
+
+// String Concatenation
+output("String Concat:");
+output("Cosmo" + " " + "rocks!");
+output("Value: " + a);
+
+// Comparison
+output("Comparison:");
+output(a > b);  // true
+output(b >= b); // true
+output(c < 5);  // true
+output(a <= 99);// false
+
+// Equality
+output("Equality:");
+output(10 == 10.0); // true
+output("hi" == "hi"); // true
+output("hi" == "bye"); // false
+output(null == null); // true
+output(a == null);  // false
+output(true == true); // true
+output(false == false); // true
+output(true == false); // false
+output(1 == true);  // false (different types)
+output(0 == false); // false (different types)
+output(a != b); // true
+output(null != 5); // true
+
+// Logical
+output("Logical:");
+output(true and true);  // true
+output(true and false); // false
+output(false and true); // false (short-circuits)
+output(true or false);  // true (short-circuits)
+output(false or true);  // true
+output(false or false); // false
+
+// Unary
+output("Unary:");
+output(-c);     // -4.5
+output(!true);  // false
+output(!false); // true
+output(!null);  // true
+output(!0);     // true (0 is falsey in our isTruthy)
+output(!1);     // false
+output(not true); // false (alternative keyword)
+output(not 0);    // true
+
+
+// --- Grouping (Parentheses) ---
+output("--- Testing Grouping ---");
+output((a + b) * 2); // (100 + 25) * 2 = 250
+output(a + (b * 2)); // 100 + (25 * 2) = 150
+
+
+// --- Control Flow ---
+output("--- Testing Control Flow ---");
+
+// If/Else If/Else
+create score = 75;
+if (score >= 90) {
+  output("Grade: A");
+} else if (score >= 80) {
+  output("Grade: B");
+} else if (score >= 70) {
+  output("Grade: C");
+} else {
+  output("Grade: D or F");
 }
 
-main(); // Call the main function to execute!
+if (null) output("This won't print"); else output("If (null) is falsey");
+if (0) output("This won't print"); else output("If (0) is falsey");
+if ("hello") output("If ('hello') is truthy");
+
+// While Loop
+output("While Loop:");
+create count = 0;
+while (count < 3) {
+  output(count);
+  count = count + 1;
+}
+
+// For Loop (desugared to while)
+output("For Loop:");
+for (create i = 0; i < 4; i = i + 1) {
+  output("i = " + i);
+  if (i == 1) {
+    create i = 100; // Test shadowing within the loop body's implicit block
+    output("  Shadowed i = " + i);
+  }
+}
+// output(i); // ERROR: Undefined variable 'i' - Correctly throws if 'i' scope is limited
+
+
+// --- Functions ---
+output("--- Testing Functions ---");
+
+// Simple function
+func greet(person) {
+  output("Greetings, " + person + "!");
+}
+greet("Developer");
+
+// Function with return
+func addNumbers(x, y) {
+  return x + y;
+}
+create sumResult = addNumbers(a, b); // 100 + 25
+output("Sum result:"); output(sumResult);
+
+// Early return
+func checkSign(num) {
+  if (num == 0) { return "zero"; }
+  if (num < 0) { return "negative"; }
+  // Implicit return null if > 0 and no return statement hit
+  output("Number is positive."); // Only executes if num > 0
+  // No return here, should implicitly return null for positive numbers
+}
+output("checkSign(-5):"); output(checkSign(-5));
+output("checkSign(0):"); output(checkSign(0));
+output("checkSign(5):"); output(checkSign(5)); // Should print "Number is positive." then output null
+
+// Recursion (Fibonacci)
+func fib(n) {
+  if (n <= 1) { return n; }
+  return fib(n - 2) + fib(n - 1);
+}
+output("Calculating fib(7)..."); // 0 1 1 2 3 5 8 13... fib(7) = 13
+output("fib(7):"); output(fib(7));
+
+// Closures
+output("Closures:");
+func makeAdder(x) {
+  func adder(y) {
+    return x + y; // Captures 'x' from the enclosing scope
+  }
+  return adder;
+}
+
+create add5 = makeAdder(5);
+create add10 = makeAdder(10);
+
+output("add5(3):"); output(add5(3));   // 8
+output("add10(3):"); output(add10(3)); // 13
+output("add5(10):"); output(add5(10)); // 15
+
+
+// --- Built-in Functions ---
+output("--- Testing Built-ins ---");
+output("add(11, 22):"); output(add(11, 22));
+output("sqrt(144):"); output(sqrt(144));
+output("Clock (time increases):");
+output(clock());
+// Simple busy loop to observe time change
+create start = clock();
+while(clock() < start + 0.01) {} // Loop for ~10ms
+output(clock());
+
+
+// --- Expression Statements ---
+output("--- Testing Expression Statements ---");
+create sideEffectVar = 0;
+sideEffectVar = sideEffectVar + 1; // Assignment used as statement
+output(sideEffectVar);
+greet("Again"); // Function call used as statement
+
+
+// ================================
+// Tests Expected to Cause Runtime Errors
+// (Uncomment to test error handling)
+// ================================
+// output("--- Testing Expected Runtime Errors ---");
+
+// output(undefinedVar);          // Undefined variable error
+// output(10 / 0);                // Division by zero error
+// output(10 % 0);                // Modulo by zero error
+// output(sqrt(-1));              // Sqrt of negative error
+// output("hello" - 5);           // Invalid operands for '-' error
+// output(!("string"));           // Bang works on any truthy/falsey value -> not an error
+// create fnVar = "not a function";
+// fnVar();                      // Calling non-function error
+// add(1, 2, 3);                 // Wrong number of arguments (arity) error
+// add(1);                       // Wrong number of arguments (arity) error
+// create circular; circular = circular; // May or may not be detectable easily
+// { create loopVar = "scope test"; } output(loopVar); // Undefined variable error
+
+
+output("--- Program End ---");

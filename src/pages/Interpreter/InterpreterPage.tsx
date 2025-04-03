@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 import Container from '../../components/Container';
 import { cosmoEBNF } from '../../lib/ebnf';
 
-export default function CosmoInterpreterPage() {
+export default function InterpreterPage() {
   return (
     <Container>
       <h1 className="text-4xl font-extrabold text-gray-900 dark:text-gray-100">

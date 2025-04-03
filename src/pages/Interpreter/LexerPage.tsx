@@ -10,7 +10,7 @@ const description = `
 const runLexer = (code: string): string => {
   const scanner = new Scanner(code);
   const tokens = scanner.scanTokens();
-  return `Token count: ${tokens.length}\n\n${JSON.stringify(tokens, null, 2)}`;
+  return `Token count: ${tokens?.length}\n\n${JSON.stringify(tokens, null, 2)}`;
 };
 
 const formatLexerError = (error: any): string => {

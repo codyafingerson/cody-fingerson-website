@@ -5,25 +5,27 @@ import { TokenType, Token } from './Token';
  * @class
  */
 export class Scanner {
-    private source: string;
-    private tokens: Token[] = [];
+    private readonly source: string;
+    private readonly tokens: Token[] = [];
     private start: number = 0;
     private current: number = 0;
     private line: number = 1;
+    private hasError: boolean = false;
 
-    private static keywords: { [key: string]: TokenType } = {
+    private static readonly keywords: Readonly<Record<string, TokenType>> = {
         'and': TokenType.AND,
+        'create': TokenType.CREATE,
         'else': TokenType.ELSE,
         'false': TokenType.FALSE,
         'func': TokenType.FUNC,
         'for': TokenType.FOR,
         'if': TokenType.IF,
-        'nil': TokenType.NIL,
+        'null': TokenType.NULL,
+        'not': TokenType.NOT,
         'or': TokenType.OR,
         'output': TokenType.OUTPUT,
         'return': TokenType.RETURN,
         'true': TokenType.TRUE,
-        'create': TokenType.CREATE,
         'while': TokenType.WHILE
     };
 
@@ -33,15 +35,22 @@ export class Scanner {
 
     /**
      * Scans the source code and returns a list of tokens.
-     * @returns {Token[]} The list of tokens found in the source code.
+     * Returns null if scanning errors were encountered.
+     * @returns {Token[] | null} The list of tokens found or null if errors occurred.
      */
-    public scanTokens(): Token[] {
+    public scanTokens(): Token[] | null {
         while (!this.isAtEnd()) {
             this.start = this.current;
             this.scanToken();
         }
 
         this.tokens.push(new Token(TokenType.EOF, "", null, this.line));
+
+        // Return null if errors were found during scanning
+        if (this.hasError) {
+            return null;
+        }
+
         return this.tokens;
     }
 
@@ -59,6 +68,7 @@ export class Scanner {
             case '+': this.addToken(TokenType.PLUS); break;
             case ';': this.addToken(TokenType.SEMICOLON); break;
             case '*': this.addToken(TokenType.STAR); break;
+            case '%': this.addToken(TokenType.MODULO); break; // Added
 
             // One or two character tokens.
             case '!':
@@ -104,7 +114,7 @@ export class Scanner {
                 } else if (this.isAlpha(c)) {
                     this.identifier();
                 } else {
-                    console.error(`Unexpected character '${c}' at line ${this.line}`);
+                    this.report(`Unexpected character '${c}'.`);
                 }
                 break;
         }
@@ -118,8 +128,7 @@ export class Scanner {
         return this.source.charAt(this.current++);
     }
 
-    // Set default literal value to null
-    private addToken(type: TokenType, literal: any = null): void {
+    private addToken(type: TokenType, literal: unknown = null): void {
         const text = this.source.substring(this.start, this.current);
         this.tokens.push(new Token(type, text, literal, this.line));
     }
@@ -133,7 +142,7 @@ export class Scanner {
     }
 
     private peek(): string {
-        if (this.isAtEnd()) return '\0';
+        if (this.isAtEnd()) return '\0'; // Use null character to signify end
         return this.source.charAt(this.current);
     }
 
@@ -145,19 +154,26 @@ export class Scanner {
     private string(): void {
         while (this.peek() !== '"' && !this.isAtEnd()) {
             if (this.peek() === '\n') this.line++;
+            // Handle escape sequences (basic example: \\ and \")
+            if (this.peek() === '\\' && (this.peekNext() === '"' || this.peekNext() === '\\')) {
+                this.advance(); // Consume the backslash
+            }
             this.advance();
         }
 
         if (this.isAtEnd()) {
-            console.error(`Unterminated string at line ${this.line}`);
+            this.report("Unterminated string.");
             return;
         }
 
         // The closing ".
         this.advance();
 
-        // Trim the surrounding quotes.
-        const value = this.source.substring(this.start + 1, this.current - 1);
+        // Trim the surrounding quotes and unescape characters.
+        let value = this.source.substring(this.start + 1, this.current - 1);
+
+        // Basic unescaping for \" and \\
+        value = value.replace(/\\"/g, '"').replace(/\\\\/g, '\\');
         this.addToken(TokenType.STRING, value);
     }
 
@@ -180,33 +196,55 @@ export class Scanner {
         while (this.isAlphaNumeric(this.peek())) this.advance();
 
         const text = this.source.substring(this.start, this.current);
-
         let type = Scanner.keywords[text];
-        let literal: any = null;
+        let literal: unknown = null; // Use unknown
+
         if (type === undefined) {
             type = TokenType.IDENTIFIER;
-        } else if (type === TokenType.TRUE) {
-            literal = true;
-        } else if (type === TokenType.FALSE) {
-            literal = false;
-        } else if (type === TokenType.NIL) {
-            literal = null;
+        } else {
+            // Set literal values only for boolean and null types represented by keywords
+            if (type === TokenType.TRUE) {
+                literal = true;
+            } else if (type === TokenType.FALSE) {
+                literal = false;
+            } else if (type === TokenType.NULL) { // Check against NULL
+                literal = null;
+            }
         }
 
-        this.addToken(type, literal);
+        // Only override literal if it's specifically true, false, or null keyword
+        if (type === TokenType.TRUE || type === TokenType.FALSE || type === TokenType.NULL) {
+            this.addToken(type, literal);
+        } else {
+            // For other keywords or identifiers, the literal is null
+            this.addToken(type, null);
+        }
     }
 
     private isDigit(c: string): boolean {
-        return c >= '0' && c <= '9';
+        // Check if c is a single character before comparing
+        return c.length === 1 && c >= '0' && c <= '9';
     }
 
     private isAlpha(c: string): boolean {
-        return (c >= 'a' && c <= 'z') ||
-               (c >= 'A' && c <= 'Z') ||
-                c === '_';
+        // Check if c is a single character before comparing
+        return c.length === 1 &&
+            ((c >= 'a' && c <= 'z') ||
+                (c >= 'A' && c <= 'Z') ||
+                c === '_');
     }
 
     private isAlphaNumeric(c: string): boolean {
         return this.isAlpha(c) || this.isDigit(c);
     }
+
+    // Helper to report errors and set the error flag
+    private report(message: string): void {
+        reportError(this.line, message);
+        this.hasError = true;
+    }
+}
+
+function reportError(line: number, message: string): void {
+    console.error(`[line ${line}] Error: ${message}`);
 }
