@@ -245,5 +245,15 @@ greet("Again"); // Function call used as statement
 // create circular; circular = circular; // May or may not be detectable easily
 // { create loopVar = "scope test"; } output(loopVar); // Undefined variable error
 
+// Standard library
+create stdAdd = add(1, 100);
+create stdSqrt = sqrt(81);
+create stdClock = clock();
+create stdRand = random();
+
+output(stdAdd);
+output(stdSqrt);
+output(stdClock);
+output(stdRand);
 
 output("--- Program End ---");
