@@ -1,15 +1,12 @@
-// FunctionObject.ts
 import { Callable } from './Callable';
-import { FunctionStatement } from '../parser/Statement';
+import type { FunctionStatement } from '../parser/statements';
 import { Environment } from './Environment';
-import { Interpreter } from './Interpreter';
+import type { Interpreter } from './Interpreter';
+import { ReturnException } from './ReturnException';
 
-/**
- * Represents a function object that can be called.
- */
 export class FunctionObject extends Callable {
-    private declaration: FunctionStatement;
-    private closure: Environment;
+    readonly declaration: FunctionStatement;
+    readonly closure: Environment;
 
     constructor(declaration: FunctionStatement, closure: Environment) {
         super();
@@ -21,33 +18,39 @@ export class FunctionObject extends Callable {
         return this.declaration.params.length;
     }
 
-    public call(args: any[], interpreter: Interpreter, ): any {
+    /**
+     * Executes the function. Creates a new environment for the function scope,
+     * defines parameters, and executes the body. Handles return values via ReturnException.
+     * @param interpreter The interpreter instance calling this function.
+     * @param args The evaluated arguments passed to the function.
+     * @returns The function's return value (or null if no explicit return).
+     * @throws {RuntimeError} If an error occurs during function execution.
+     */
+    public call(interpreter: Interpreter, args: unknown[]): unknown {
         const environment = new Environment(this.closure);
+
+        // Bind arguments to parameter names in the new environment
         for (let i = 0; i < this.declaration.params.length; i++) {
-            environment.define(this.declaration.params[i].lexeme, args[i]);
+            const paramName = this.declaration.params[i].lexeme;
+            environment.define(paramName, args[i]);
         }
 
         try {
-            interpreter.executeBlock(this.declaration.body, environment); // Execute the function body
-        } catch (returnValue) {
-            if (returnValue instanceof ReturnException) {
-                return returnValue.value;
+            // Execute the function body in the new environment
+            interpreter.executeBlock(this.declaration.body, environment);
+        } catch (error: unknown) {
+            // If a ReturnException was thrown, catch it and return its value
+            if (error instanceof ReturnException) {
+                return error.value;
             } else {
-                throw returnValue;
+                throw error;
             }
         }
+
         return null;
     }
 
     public toString(): string {
         return `<fn ${this.declaration.name.lexeme}>`;
     }
-}
-
-
-/**
- * Represents a return exception that is thrown when a return statement is encountered.
- */
-export class ReturnException {
-    constructor(public value: any) {}
 }

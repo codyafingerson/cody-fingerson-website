@@ -1,12 +1,13 @@
-import { Token } from "../scanner/Token";
+import type { Token } from "../scanner/Token";
 
 export class ParseError extends Error {
-    public line: number;
-    public token: Token;
+    readonly line: number;
+    readonly token: Token;
 
     constructor(message: string, token: Token) {
-        super(`[Line ${token.line}] - ${message}`);
-        this.name = "Parse Error";
+        const where = token.lexeme === 'EOF' ? " at end" : ` at '${token.lexeme}'`;
+        super(`[Line ${token.line}] Error${where}: ${message}`);
+        this.name = "ParseError";
         this.line = token.line;
         this.token = token;
     }

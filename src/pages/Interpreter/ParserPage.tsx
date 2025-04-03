@@ -13,7 +13,11 @@ const description = `
 
 const runParser = (code: string): string => {
   const scanner = new Scanner(code);
-  const parser = new CosmoParser(scanner.scanTokens());
+  const tokens = scanner.scanTokens();
+  if (!tokens) {
+    throw new Error("Scanning failed. No tokens were generated.");
+  }
+  const parser = new CosmoParser(tokens);
   const ast = parser.parse();
 
   return `Generated AST:\n\n${JSON.stringify(ast, null, 2)}`;

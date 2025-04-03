@@ -20,6 +20,10 @@ const runRuntime = (code: string): Promise<string> => {
       const scanner = new Scanner(code);
       const tokens = scanner.scanTokens();
 
+      if (!tokens) {
+        throw new Error("Token scanning failed.");
+      }
+      
       const parser = new CosmoParser(tokens);
       const statements = parser.parse();
 
