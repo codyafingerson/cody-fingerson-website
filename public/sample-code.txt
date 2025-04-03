@@ -189,7 +189,6 @@ func fib(n) {
 output("Calculating fib(7)..."); // 0 1 1 2 3 5 8 13... fib(7) = 13
 output("fib(7):"); output(fib(7));
 
-
 // Closures
 output("Closures:");
 func makeAdder(x) {
