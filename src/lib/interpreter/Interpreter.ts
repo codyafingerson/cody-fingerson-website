@@ -28,7 +28,7 @@ import { Environment } from "./Environment";
 import { FunctionObject } from "./FunctionObject";
 import { ReturnException } from "./ReturnException";
 import { RuntimeError } from "./RuntimeError";
-import { AddFunction, SquareRootFunction, ClockFunction } from "./StandardLib";
+import { AddFunction, SquareRootFunction, ClockFunction, RandomFunction } from "./StandardLib";
 
 export class Interpreter implements ExpressionVisitor<unknown>, StatementVisitor<void> {
     readonly globals: Environment = new Environment();
@@ -41,6 +41,7 @@ export class Interpreter implements ExpressionVisitor<unknown>, StatementVisitor
         this.globals.define('add', new AddFunction());
         this.globals.define('sqrt', new SquareRootFunction());
         this.globals.define('clock', new ClockFunction());
+        this.globals.define('random', new RandomFunction()); 
     }
 
     public interpret(statements: Statement[] | null): void {
