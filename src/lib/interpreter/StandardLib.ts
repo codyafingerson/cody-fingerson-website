@@ -91,3 +91,17 @@ export class ClockFunction extends NativeCallable {
         return "<native fn clock>";
     }
 }
+
+export class RandomFunction extends NativeCallable {
+    public arity(): number {
+        return 0;
+    }
+
+    public call(_interpreter: Interpreter, _args: unknown[], _callToken?: Token): unknown {
+        return Math.random();
+    }
+
+    public toString(): string {
+        return "<native fn random>";
+    }
+}
