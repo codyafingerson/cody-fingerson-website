@@ -2,6 +2,7 @@ import 'github-markdown-css';
 import ReactMarkdown from "react-markdown";
 import Container from '../../components/Container';
 import { cosmoEBNF } from '../../lib/ebnf';
+import { cosmoStandardLibrary } from '../../lib/standardLibDocs';
 
 export default function InterpreterPage() {
   return (
@@ -23,7 +24,7 @@ export default function InterpreterPage() {
         <li>A custom syntax (see below)</li>
         <li>Basic arithmetic operations: addition, subtraction, multiplication, and division.</li>
         <li>Variable assignment and retrieval.</li>
-        <li>A very simple standard library of <code>add(x, y)</code> and <code>sqrt(x)</code></li>
+        <li>A very simple standard library of <code>add(x, y)</code>, <code>sqrt(x)</code>, and <code>clock()</code></li>
       </ul>
       <h2 className="mt-8 text-2xl font-bold text-gray-900 dark:text-gray-100">
         Conclusion
@@ -39,6 +40,14 @@ export default function InterpreterPage() {
       <div className="mt-2 text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
         <div className="markdown-body p-5">
           <ReactMarkdown children={cosmoEBNF} />
+        </div>
+      </div>
+      <h2 className="mt-8 text-2xl font-bold text-gray-900 dark:text-gray-100">
+        Cosmo Standard Library
+      </h2>
+      <div className="mt-2 text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+        <div className="markdown-body p-5">
+          <ReactMarkdown children={cosmoStandardLibrary} />
         </div>
       </div>
     </Container>
