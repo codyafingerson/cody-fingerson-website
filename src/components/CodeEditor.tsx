@@ -1,9 +1,7 @@
-import AceEditor from "react-ace";
-
-// This ensures that the AceEditor is loaded with the correct mode and theme
-import ace from "ace-builds";
-ace.config.set('basePath', '/node_modules/ace-builds/src-min-noconflict');
-ace.config.setModuleUrl('ace/mode/typescript', '/node_modules/ace-builds/src-min-noconflict/mode-typescript.js');
+import ReactCodeMirror from "@uiw/react-codemirror";
+import { javascript } from "@codemirror/lang-javascript";
+import { EditorView } from "@codemirror/view";
+import { dracula } from "@uiw/codemirror-theme-dracula";
 
 interface CodeEditorProps {
     value: string;
@@ -12,19 +10,15 @@ interface CodeEditorProps {
 
 export default function CodeEditor({ value, onChange }: CodeEditorProps) {
     return (
-        <AceEditor
-            width="100%"
-            height="400px"
-            mode="typescript"
-            name="code-editor"
-            theme="terminal"
-            onChange={onChange}
-            fontSize={14}
-            lineHeight={19}
-            showPrintMargin={true}
-            showGutter={true}
-            highlightActiveLine={true}
+        <ReactCodeMirror
             value={value}
+            height="400px"
+            theme={dracula}
+            style={{ fontFamily: 'Menlo, Monaco, Consolas, "Courier New", monospace', fontSize: '14px' }}
+            extensions={[javascript({ jsx: true }), EditorView.lineWrapping]}
+            onChange={(value) => {
+                onChange(value);
+            }}
         />
     );
 }
