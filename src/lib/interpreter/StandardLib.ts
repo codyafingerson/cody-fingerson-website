@@ -25,7 +25,20 @@ abstract class NativeCallable extends Callable {
     }
 
      // Abstract methods required by Callable
+
+     /**
+      * Returns the number of arguments this function accepts.
+      * @returns The number of arguments.
+      */
      abstract arity(): number;
+
+     /**
+      * Calls the function with the provided arguments.
+      * @param interpreter The interpreter instance.
+      * @param args The arguments to pass to the function.
+      * @param callToken The token representing the function call (optional).
+      * @returns The result of the function call.
+      */
      abstract call(interpreter: Interpreter, args: unknown[], callToken?: Token): unknown;
      abstract toString(): string;
 }
@@ -103,5 +116,87 @@ export class RandomFunction extends NativeCallable {
 
     public toString(): string {
         return "<native fn random>";
+    }
+}
+
+export class AbsoluteFunction extends NativeCallable {
+    public arity(): number {
+        return 1;
+    }
+
+    public call(_interpreter: Interpreter, args: unknown[], callToken?: Token): unknown {
+        const a = args[0];
+        const errorToken = this.getErrorToken(callToken, 'abs');
+
+        if (typeof a !== 'number') {
+            throw new RuntimeError(errorToken, `Operand for 'abs' must be a number (got ${typeof a}).`);
+        }
+        return Math.abs(a);
+    }
+
+    public toString(): string {
+        return "<native fn abs>";
+    }
+}
+
+export class SubstringFunction extends NativeCallable {
+    public arity(): number {
+        return 3;
+    }
+
+    public call(_interpreter: Interpreter, args: unknown[], callToken?: Token): unknown {
+        const str = args[0];
+        const start = args[1];
+        const end = args[2];
+        const errorToken = this.getErrorToken(callToken, 'substring');
+
+        if (typeof str !== 'string') {
+            throw new RuntimeError(errorToken, `First argument for 'substring' must be a string (got ${typeof str}).`);
+        }
+        if (typeof start !== 'number' || typeof end !== 'number') {
+            throw new RuntimeError(errorToken, `Second and third arguments for 'substring' must be numbers (got ${typeof start} and ${typeof end}).`);
+        }
+        return str.substring(start, end);
+    }
+
+    public toString(): string {
+        return "<native fn substring>";
+    }
+}
+
+export class StringLengthFunction extends NativeCallable {
+    public arity(): number {
+        return 1;
+    }
+
+    public call(_interpreter: Interpreter, args: unknown[], callToken?: Token): unknown {
+        const str = args[0];
+        const errorToken = this.getErrorToken(callToken, 'stringLength');
+
+        if (typeof str !== 'string') {
+            throw new RuntimeError(errorToken, `Argument for 'stringLength' must be a string (got ${typeof str}).`);
+        }
+
+        return str.length;
+    }
+
+    public toString(): string {
+        return "<native fn stringLength>";
+    }
+}
+
+export class TypeOfFunction extends NativeCallable {
+    public arity(): number {
+        return 1;
+    }
+
+    public call(_interpreter: Interpreter, args: unknown[], callToken?: Token): unknown {
+        const arg = args[0];
+
+        return typeof arg;
+    }
+
+    public toString(): string {
+        return "<native fn typeof>";
     }
 }
