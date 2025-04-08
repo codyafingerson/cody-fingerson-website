@@ -1,7 +1,7 @@
 import ReactCodeMirror from "@uiw/react-codemirror";
-import { javascript } from "@codemirror/lang-javascript";
 import { EditorView } from "@codemirror/view";
 import { dracula } from "@uiw/codemirror-theme-dracula";
+import cosmoExtension from "../utils/cosmoExtensions";
 
 interface CodeEditorProps {
     value: string;
@@ -14,8 +14,11 @@ export default function CodeEditor({ value, onChange }: CodeEditorProps) {
             value={value}
             height="400px"
             theme={dracula}
-            style={{ fontFamily: 'Menlo, Monaco, Consolas, "Courier New", monospace', fontSize: '14px' }}
-            extensions={[javascript({ jsx: true }), EditorView.lineWrapping]}
+            style={{
+                fontFamily: '"JetBrains Mono", Menlo, Monaco, Consolas, "Courier New", monospace',
+                fontSize: '14px',
+            }}
+            extensions={[cosmoExtension, EditorView.lineWrapping]}
             onChange={(value) => {
                 onChange(value);
             }}
