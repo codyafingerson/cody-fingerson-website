@@ -190,7 +190,7 @@ export class TypeOfFunction extends NativeCallable {
         return 1;
     }
 
-    public call(_interpreter: Interpreter, args: unknown[], callToken?: Token): unknown {
+    public call(_interpreter: Interpreter, args: unknown[], _callToken?: Token): unknown {
         const arg = args[0];
 
         return typeof arg;
