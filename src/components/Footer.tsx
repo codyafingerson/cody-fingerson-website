@@ -1,9 +1,19 @@
-export function Footer() {
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+
+export default function Footer() {
   return (
-    <footer className="bg-white dark:bg-slate-800 p-6 text-center">
-      <p className="text-slate-800 dark:text-white">
-        &copy; {new Date().getFullYear()} Cody Fingerson. All rights reserved.
-      </p>
+    <footer className="dark:bg-gray-900 dark:text-white text-center py-4">
+      <div className="container mx-auto flex flex-col items-center">
+        <div className="flex space-x-4 mb-2">
+          <a href="https://github.com/codyafingerson" target='_blank' rel="noopener noreferrer" className="hover:text-blue-400">
+            <FaGithub size={24} />
+          </a>
+          <a href="https://www.linkedin.com/in/codyfingerson" target='_blank' rel="noopener noreferrer" className="hover:text-blue-400">
+            <FaLinkedin size={24} />
+          </a>
+        </div>
+        <div>&copy; {new Date().getFullYear()} Cody A. Fingerson</div>
+      </div>
     </footer>
-  );
+  )
 }

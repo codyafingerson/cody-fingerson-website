@@ -1,88 +1,91 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect, useRef } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { FaBars, FaTimes } from 'react-icons/fa';
+
+const routes = [
+  { path: '/', label: 'Home' },
+  { path: '/about', label: 'About' },
+  { path: '/projects', label: 'Projects' },
+  { path: '/contact', label: 'Contact' },
+  { path: '/interpreter', label: 'Interpreter' },
+];
 
 export default function Navbar() {
-  const location = useLocation();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
 
-  const isActive = (path: string) =>
-    location.pathname === path
-      ? "text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500"
-      : "text-slate-800 dark:text-white";
-
-  const linkHoverStyle = "hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-yellow-400 hover:via-red-500 hover:to-pink-500";
-
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
   };
 
-  const navLinks = [
-    { path: "/projects", label: "Projects" },
-    { path: "/experience", label: "Experience" },
-    { path: "/skills", label: "Skills" },
-    { path: "/terminal", label: "Terminal" },
-    { path: "/interpreter", label: "Interpreter" },
-  ];
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [mobileMenuRef]);
 
   return (
-    <nav className="bg-white dark:bg-slate-800 p-6 relative shadow-md">
-      <div className="container mx-auto flex items-center justify-between flex-wrap">
-        <Link
-          to="/"
-          className="text-slate-800 dark:text-white text-xl font-semibold"
-          onClick={closeMobileMenu}
-        >
-          Cody Fingerson
+    <header className="bg-white dark:bg-slate-900 shadow-md dark:text-white dark:border-gray-700 dark:border-b sticky top-0 z-50">
+      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <Link to="/" className="text-2xl font-semibold">
+          Cody A. Fingerson
         </Link>
-
-        {/* Hamburger Button - Only on Mobile! */}
-        <button
-          className="md:hidden p-2 rounded-md text-slate-800 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-pink-500"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
-          aria-expanded={isMobileMenuOpen}
-        >
-          {isMobileMenuOpen ? (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}> <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/> </svg>
-          ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}> <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7"/> </svg>
-          )}
-        </button>
-
-        <div className="hidden md:flex space-x-4 items-center">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              // Applying active state, hover style, and base transition
-              className={`${isActive(link.path)} ${linkHoverStyle} transition duration-300`}
-            >
-              {link.label}
-            </Link>
-          ))}
+        <nav className="hidden md:block">
+          <ul className="flex space-x-6">
+            {routes.map(({ path, label }) => (
+              <li key={path}>
+                <NavLink
+                  to={path}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-blue-600 border-b-2 border-blue-600 pb-1 dark:text-blue-400 dark:border-blue-400"
+                      : "hover:text-blue-500 transition dark:hover:text-blue-300"
+                  }
+                >
+                  {label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className="md:hidden">
+          <button onClick={toggleMenu} aria-label="Toggle menu" className=" p-2 rounded-md text-slate-800 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 cursor-pointer">
+            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
         </div>
       </div>
 
-      {/* Mobile Navigation Links - Shown only when isMobileMenuOpen is true */}
-      <div
-        className={`md:hidden ${isMobileMenuOpen ? "block" : "hidden"} w-full absolute left-0 top-full bg-white dark:bg-slate-800 shadow-md z-20`}
-        id="mobile-menu"
-      >
-        <div className="px-6 pt-2 pb-4 space-y-3 flex flex-col">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={`${isActive(
-                link.path
-              )} ${linkHoverStyle} block py-2 rounded-md text-base font-medium transition duration-300`}
-              onClick={closeMobileMenu}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
+      {/* Mobile Menu */}
+      <div ref={mobileMenuRef} className={`${isOpen ? 'block' : 'hidden'} md:hidden absolute top-full left-0 right-0 bg-white dark:bg-slate-900 shadow-md dark:border-gray-700 dark:border-t`}>
+        <nav>
+          <ul className="flex flex-col items-center space-y-4 py-4">
+            {routes.map(({ path, label }) => (
+              <li key={path}>
+                <NavLink
+                  to={path}
+                  onClick={toggleMenu} // Close menu on link click
+                  className={({ isActive }) =>
+                    `block w-full text-center py-2 ${isActive
+                      ? "text-blue-600 font-semibold dark:text-blue-400"
+                      : "hover:text-blue-500 transition dark:hover:text-blue-300"
+                    }`
+                  }
+                >
+                  {label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
-    </nav>
-  );
+    </header>
+  )
 }

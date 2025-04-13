@@ -1,48 +1,44 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { Footer } from "./components/Footer";
-import Navbar from "./components/Navbar";
-import CatchAll from "./pages/CatchAll";
-import ExperiencePage from "./pages/ExperiencePage";
-import IndexPage from "./pages/IndexPage";
-import ProjectsPage from "./pages/ProjectsPage";
-import SkillsPage from "./pages/SkillsPage";
-import TerminalPage from "./pages/TerminalPage";
-import InterpreterPage from "./pages/Interpreter/InterpreterPage";
-import LexerPage from "./pages/Interpreter/LexerPage";
-import ParserPage from "./pages/Interpreter/ParserPage";
-import RuntimePage from "./pages/Interpreter/RuntimePage";
-import InterpreterLayout from "./components/InterpreterLayout";
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+
+/* -- Pages -- */
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ProjectsPage from './pages/ProjectsPage';
+import ContactPage from './pages/ContactPage';
+import CatchAllPage from './pages/CatchAllPage';
+
+/* -- Global Components -- */
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import InterpreterPage from './pages/Interpreter/InterpreterPage';
+import InterpreterLayout from './components/InterpreterLayout';
+import PlaygroundPage from './pages/Interpreter/PlaygroundPage';
+import SettingsPage from './pages/Interpreter/SettingsPage';
 
 export default function App() {
+  const location = useLocation();
   return (
-    <Router
-      future={{
-        v7_startTransition: true,
-        v7_relativeSplatPath: true,
-      }}
-    >
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <div className="flex-grow">
-          <Routes>
-            <Route path="/" element={<IndexPage />} />
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      <main className="flex-grow container mx-auto px-4 py-10">
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/experience" element={<ExperiencePage />} />
-            <Route path="/skills" element={<SkillsPage />} />
-            <Route path="/terminal" element={<TerminalPage />} />
+            <Route path="/contact" element={<ContactPage />} />
             <Route path="/interpreter" element={<InterpreterLayout />}>
-              <Route index element={<InterpreterPage />} /> {/* Default page at /interpreter */}
-              <Route path="lexer" element={<LexerPage />} />
-              <Route path="parser" element={<ParserPage />} />
-              <Route path="runtime" element={<RuntimePage />} />
+              <Route index element={<InterpreterPage />} />
+              <Route path="playground" element={<PlaygroundPage />} />
+              <Route path="settings" element={<SettingsPage />} />
             </Route>
 
-            {/* Catch-all route for 404 pages */}
-            <Route path="*" element={<CatchAll />} />
+            <Route path="*" element={<CatchAllPage />} />
           </Routes>
-        </div>
-        <Footer />
-      </div>
-    </Router>
+        </AnimatePresence>
+      </main>
+      <Footer />
+    </div>
   );
 }
