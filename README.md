@@ -1,7 +1,20 @@
 # Cody Fingerson Portfolio
 
-This repository contains the source code for my portfolio website. The website can be found [here](https://www.codyfingerson.com)
+## Overview
+This is a portfolio website for Cody Fingerson, showcasing his projects and skills. The website is built using TypeScript, NextJS, and styled using TailwindCSS and is designed to be responsive and user-friendly.
 
-## Project Details
+## Features
+- Responsive design
+- Dark mode support
+- Smooth scrolling
+- Animations
+- Skills
+- Projects
+- Contact form
+- Custom Interpreter Playground
+- Custom Code Editor
 
-The code is fairly straightforward, written in TypeScript using the React library and styled with TailwindCSS.
+## Technologies Used (for this repo)
+- TypeScript
+- NextJS
+- TailwindCSS
