@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${openSans.variable} ${sourceCodePro.variable} antialiased`}>
+      <body className={`${openSans.variable} ${sourceCodePro.variable} antialiased`} suppressHydrationWarning>
         {children}
       </body>
     </html>

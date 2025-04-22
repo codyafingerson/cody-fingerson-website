@@ -18,4 +18,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     pages: {
         signIn: "/signin",
     },
+    callbacks: {
+        async signIn(params) {
+            const { user } = params
+            if(user.email && user.email.endsWith("@codyfingerson.com")) {
+                return true
+            } else {
+                return false
+            }
+        },
+    }
 })
