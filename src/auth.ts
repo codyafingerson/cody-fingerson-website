@@ -4,6 +4,7 @@ import type { Provider } from "next-auth/providers"
 
 const providers: Provider[] = [Zoho]
 
+// map of providers (in case more are added in the future)
 export const providerMap = providers.map((provider) => {
     if (typeof provider === "function") {
         const providerData = provider();
