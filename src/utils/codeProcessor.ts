@@ -1,7 +1,7 @@
-import { Scanner } from '../lib/scanner/Scanner';
-import { Parser as CosmoParser, Parser } from '../lib/parser/Parser';
-import { Interpreter } from '../lib/interpreter/Interpreter';
-import { JavaScriptCompiler } from '../lib/compiler/Compiler';
+import { Scanner } from '@/cosmo/scanner/Scanner';
+import { Parser as CosmoParser, Parser } from '@/cosmo/parser/Parser';
+import { Interpreter } from '@/cosmo/interpreter/Interpreter';
+import { JavaScriptCompiler } from '@/cosmo/compiler/Compiler';
 
 /**
  * Processes source code through various stages: lexing, parsing, interpreting, and compiling.

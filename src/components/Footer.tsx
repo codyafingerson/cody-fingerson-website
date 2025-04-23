@@ -1,3 +1,6 @@
+'use client'
+
+import Link from 'next/link';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 export default function Footer() {
@@ -12,7 +15,11 @@ export default function Footer() {
             <FaLinkedin size={24} />
           </a>
         </div>
-        <div>&copy; {new Date().getFullYear()} Cody A. Fingerson</div>
+        <div>&copy; {new Date().getFullYear()} {' '}
+          <Link href="/signin">
+            Cody A. Fingerson
+          </Link>
+          </div>
       </div>
     </footer>
   )

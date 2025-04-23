@@ -4,7 +4,7 @@ import { EditorView } from "@codemirror/view";
 import { dracula } from "@uiw/codemirror-theme-dracula";
 import { vscodeDark, vscodeLight } from "@uiw/codemirror-theme-vscode";
 import cosmoExtension from "../utils/cosmoExtensions";
-import { CodeEditorThemeContext, ThemeKey } from "../context/CodeEditorThemeContext";
+import { CodeEditorThemeContext, ThemeKey } from '@/app/provider';
 
 interface CodeEditorProps {
   value: string;
@@ -23,6 +23,7 @@ export default function CodeEditor({ value, onChange }: CodeEditorProps) {
 
   return (
     <ReactCodeMirror
+    className="z-0"
       value={value}
       height="400px"
       // Use the mapped theme object from our themesMap.

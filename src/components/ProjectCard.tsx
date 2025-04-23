@@ -1,6 +1,5 @@
-import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
-import { Project } from '../data/projects';
+import { Project } from '../../generated/prisma';
 
 interface ProjectCardProps {
     project: Project;
@@ -10,9 +9,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     const descriptionWithBreaks = project.description.replace(/\n/g, '<br />');
 
     return (
-        <motion.div
-            whileHover={{ scale: 1.03 }}
-            className="dark:bg-gray-800 dark:text-white p-6 rounded-lg shadow-lg transition transform hover:shadow-2xl hover:shadow-slate-900 dark:hover:shadow-gray-600"
+        <div className="dark:bg-gray-800 dark:text-white p-6 rounded-lg shadow-lg transition transform hover:shadow-2xl hover:shadow-slate-900 dark:hover:shadow-gray-600"
         >
             <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
             <p className="mb-4" dangerouslySetInnerHTML={{ __html: descriptionWithBreaks }} />
@@ -52,6 +49,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                     </a>
                 )}
             </div>
-        </motion.div>
+        </div>
     );
 }
