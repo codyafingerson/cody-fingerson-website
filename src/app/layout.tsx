@@ -1,19 +1,8 @@
 import type { Metadata } from "next";
-import { Open_Sans, Source_Code_Pro } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { CodeEditorThemeContext, CodeEditorThemeProvider } from "./provider";
-
-const openSans = Open_Sans({
-  variable: "--font-open-sans",
-  subsets: ["latin"],
-});
-
-const sourceCodePro = Source_Code_Pro({
-  variable: "--font-source-code-pro",
-  subsets: ["latin"],
-});
+import { CodeEditorThemeProvider } from "./provider";
 
 export const metadata: Metadata = {
   title: "Cody A. Fingerson | Software Developer",
@@ -23,7 +12,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${openSans.variable} ${sourceCodePro.variable} antialiased flex flex-col min-h-screen`} suppressHydrationWarning>
+      <body className="antialiased flex flex-col min-h-screen" suppressHydrationWarning>
         <Navbar />
         <main className="flex-grow container mx-auto px-4 py-10">
           <CodeEditorThemeProvider>
