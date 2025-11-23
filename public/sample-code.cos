@@ -1,3 +1,59 @@
-create x = 10;
+// The main function of the program
+func main() {
+  // Variable declaration and arithmetic expressions
+  create x = 10;
+  create y = 5;
+  create z = x * y + (x - y);
 
-output(x);
+  output(z);
+
+  create addition = add(x, y);
+
+  output(addition);
+
+  create squareRoot = sqrt(z);
+  output(squareRoot);
+
+  // Conditional statement
+  if (x > y) {
+    output("x is greater than y");
+  } else {
+    output("x is not greater than y");
+  }
+
+  // Loop
+  create i = 0;
+  while (i < 3) {
+    output(i);
+    i = i + 1;
+  }
+
+  // For loop
+  for (create j = 0; j < 2; j = j + 1) {
+    output(j);
+  }
+
+  // Equality and comparison operators
+  output(x == 10);
+  output(y != 5);
+  output(x > y);
+  output(x <= 10);
+
+  // Unary operators
+  output(-x);
+  output(!false);
+
+  // String literal
+  create str = "hello";
+  output(str);
+
+  // Null literal
+  create nullVar = null;
+  output(nullVar);
+
+  // Parenthesized expression
+  create parenResult = (x + y) * 2;
+  output(parenResult);
+}
+
+main(); // Call the main function to execute!
