@@ -1,16 +1,16 @@
-import type { Token } from "../scanner/Token";
-import { RuntimeError } from "./RuntimeError";
+import type { Token } from '../scanner/Token'
+import { RuntimeError } from './RuntimeError'
 
 /**
  * Manages variable scopes and their values during interpretation.
  * Supports nested scopes for blocks and functions.
  */
 export class Environment {
-    readonly enclosing: Environment | null;
-    private readonly values: Map<string, unknown> = new Map();
+    readonly enclosing: Environment | null
+    private readonly values: Map<string, unknown> = new Map()
 
     constructor(enclosing: Environment | null = null) {
-        this.enclosing = enclosing;
+        this.enclosing = enclosing
     }
 
     /**
@@ -20,7 +20,7 @@ export class Environment {
      * @param value The initial value.
      */
     public define(name: string, value: unknown): void {
-        this.values.set(name, value);
+        this.values.set(name, value)
     }
 
     /**
@@ -33,14 +33,14 @@ export class Environment {
     public get(name: Token): unknown {
         if (this.values.has(name.lexeme)) {
             // Ensure value is not undefined before returning (though Map shouldn't store undefined for existing keys)
-            return this.values.get(name.lexeme) ?? null;
+            return this.values.get(name.lexeme) ?? null
         }
 
         if (this.enclosing !== null) {
-            return this.enclosing.get(name);
+            return this.enclosing.get(name)
         }
 
-        throw new RuntimeError(name, `Undefined variable '${name.lexeme}'.`);
+        throw new RuntimeError(name, `Undefined variable '${name.lexeme}'.`)
     }
 
     /**
@@ -52,15 +52,15 @@ export class Environment {
      */
     public assign(name: Token, value: unknown): void {
         if (this.values.has(name.lexeme)) {
-            this.values.set(name.lexeme, value);
-            return;
+            this.values.set(name.lexeme, value)
+            return
         }
 
         if (this.enclosing !== null) {
-            this.enclosing.assign(name, value);
-            return;
+            this.enclosing.assign(name, value)
+            return
         }
 
-        throw new RuntimeError(name, `Undefined variable '${name.lexeme}' for assignment.`);
+        throw new RuntimeError(name, `Undefined variable '${name.lexeme}' for assignment.`)
     }
 }

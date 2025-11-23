@@ -1,6 +1,6 @@
-import { Outlet } from "react-router-dom";
-import SubNavbar from "./SubNavbar";
-import { motion } from "framer-motion";
+import { Outlet } from 'react-router-dom'
+import SubNavbar from './SubNavbar'
+import { motion } from 'framer-motion'
 
 export default function InterpreterLayout() {
     return (

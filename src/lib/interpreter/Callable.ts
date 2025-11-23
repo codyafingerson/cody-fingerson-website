@@ -1,7 +1,7 @@
-import { Interpreter } from "./Interpreter";
+import { Interpreter } from './Interpreter'
 
 export abstract class Callable {
-    abstract arity(): number;
+    abstract arity(): number
 
     /**
      * Executes the callable's logic.
@@ -10,10 +10,10 @@ export abstract class Callable {
      * @returns The result of the call.
      * @throws {RuntimeError} If a runtime error occurs during the call.
      */
-    abstract call(interpreter: Interpreter, args: unknown[]): unknown;
+    abstract call(interpreter: Interpreter, args: unknown[]): unknown
 
     /**
      * Returns a string representation of the callable.
      */
-    abstract toString(): string;
+    abstract toString(): string
 }

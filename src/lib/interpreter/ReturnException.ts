@@ -3,11 +3,11 @@
  * It's caught by the function's call method.
  */
 export class ReturnException extends Error {
-    readonly value: unknown;
+    readonly value: unknown
 
     constructor(value: unknown) {
-        super("Function return control flow exception");
-        this.name = "Return Exception";
-        this.value = value;
+        super('Function return control flow exception')
+        this.name = 'Return Exception'
+        this.value = value
     }
 }

@@ -6,11 +6,11 @@ import { BrowserRouter } from 'react-router-dom'
 import { CodeEditorThemeProvider } from './context/CodeEditorThemeContext.tsx'
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <CodeEditorThemeProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </CodeEditorThemeProvider>
-  </StrictMode>,
+    <StrictMode>
+        <CodeEditorThemeProvider>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </CodeEditorThemeProvider>
+    </StrictMode>
 )

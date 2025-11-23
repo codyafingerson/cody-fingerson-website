@@ -1,17 +1,19 @@
-import { Expression } from "../expressions/Expression";
-import { Statement } from "./Statement";
-import { StatementVisitor } from "./StatementVisitor";
+import { Expression } from '../expressions/Expression'
+import { Statement } from './Statement'
+import { StatementVisitor } from './StatementVisitor'
 
 export class ExpressionStatement extends Statement {
-    readonly expression: Expression;
+    readonly expression: Expression
 
     constructor(expression: Expression) {
-        super();
-        this.expression = expression;
+        super()
+        this.expression = expression
     }
 
-     toString(): string {
-        return `ExprStatement { ${this.expression} }`;
+    toString(): string {
+        return `ExprStatement { ${this.expression} }`
     }
-    accept<R>(visitor: StatementVisitor<R>): R { return visitor.visitExpressionStatement(this); }
+    accept<R>(visitor: StatementVisitor<R>): R {
+        return visitor.visitExpressionStatement(this)
+    }
 }

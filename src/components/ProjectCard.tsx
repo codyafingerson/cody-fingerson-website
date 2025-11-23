@@ -1,13 +1,13 @@
-import { motion } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
-import { Project } from '../data/projects';
+import { motion } from 'framer-motion'
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
+import { Project } from '../data/projects'
 
 interface ProjectCardProps {
-    project: Project;
+    project: Project
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
-    const descriptionWithBreaks = project.description.replace(/\n/g, '<br />');
+    const descriptionWithBreaks = project.description.replace(/\n/g, '<br />')
 
     return (
         <motion.div
@@ -19,10 +19,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             {/* Technology Badges */}
             <div className="flex flex-wrap gap-2 mb-4">
                 {project.technologies.map((tech, index) => (
-                    <span
-                        key={index}
-                        className="text-sm bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded"
-                    >
+                    <span key={index} className="text-sm bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">
                         {tech}
                     </span>
                 ))}
@@ -53,5 +50,5 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 )}
             </div>
         </motion.div>
-    );
+    )
 }
