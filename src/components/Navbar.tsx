@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FaBars, FaTimes } from 'react-icons/fa'
 
 const routes = [
@@ -13,6 +13,7 @@ const routes = [
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
     const mobileMenuRef = useRef<HTMLDivElement | null>(null)
+    const location = useLocation()
 
     const toggleMenu = () => {
         setIsOpen(!isOpen)
@@ -31,6 +32,10 @@ export default function Navbar() {
             document.removeEventListener('mousedown', handleClickOutside)
         }
     }, [mobileMenuRef])
+
+    if (location.pathname === '/portfolio') {
+        return ''
+    }
 
     return (
         <header className="bg-white dark:bg-slate-900 shadow-md dark:text-white dark:border-gray-700 dark:border-b sticky top-0 z-50">
