@@ -30,38 +30,30 @@ export default function AboutPage() {
 
                 <div className="space-y-5 text-justify">
                     <p>
-                        Hi! I’m Cody — a senior Computer Science student at Montana State University, a backend
-                        enthusiast, and a part-time IT Technician at <strong>AdvicePay</strong>. I love building clean,
-                        reliable software that solves real-world problems and improves how people interact with
+                        Hi, I'm Cody! I'm a recent Computer Science graduate from Montana State University, a backend
+                        enthusiast, and currently an IT Specialist at <strong>AdvicePay</strong>. I love building clean,
+                        reliable software that solves real-world problems and elevates the way people interact with
                         technology.
                     </p>
                     <p>
-                        Before diving deep into software, I worked in healthcare as a pharmacy technician and did
-                        hands-on electromechanical work — experiences that shaped how I approach systems, detail, and
-                        people. Since then, I’ve built all kinds of things, from internal tools for laser calibration at
-                        Wavelength Electronics, to my own toy programming language called Cosmo, just for fun (and
-                        chaos).
+                        Before diving deep into software engineering, I worked in healthcare as a pharmacy technician and 
+                        gained hands-on experience in electromechanical work. Those roles heavily shaped my detail-oriented 
+                        approach to both people and complex systems. Since then, my tech journey has spanned a wide variety 
+                        of projects: I've developed internal QCL lab calibration tools for <strong>Wavelength Electronics</strong>, 
+                        built software for a local non-profit, and even designed a quirky toy programming language called <strong>Cosmo</strong> 
+                        just for the fun (and chaos) of it.
                     </p>
                     <p>
-                        I've developed internal calibration tools for QCL lab instruments at{' '}
-                        <strong>Wavelength Electronics</strong>, created a quirky programming language called{' '}
-                        <strong>Cosmo</strong> in TypeScript, and built tools for non-profits and personal projects. I
-                        thrive on finding structure in complexity, especially when working with{' '}
-                        <strong>TypeScript</strong> and <strong>C#</strong>.
+                        I thrive on finding structure in complexity. While my technical toolkit includes Node.js, Spring Boot, React, Vue, Express, and WPF, 
+                        what truly drives me isn't the tech stack — it's the challenge of designing systems that are both 
+                        highly efficient and incredibly maintainable.
                     </p>
                     <p>
-                        My technical experience spans Node.js, Spring Boot, React, Vue, Express, WPF, and more — yet
-                        what drives me is designing maintainable and efficient systems.
+                        When I'm away from the keyboard, you'll usually find me snapping photos, or hanging out with my partner and our dog.
                     </p>
                     <p>
-                        Outside of code, you’ll usually find me messing with espresso recipes, snapping photos, or
-                        hanging out with my partner and our dog. I’m also proud to be part of the LGBTQ+ community and
-                        care deeply about making tech a more inclusive and welcoming space.
-                    </p>
-                    <p>
-                        Curious about my work or interested in a collaboration?
+                        Curious about my work or interested in collaborating?
                         <Link to="/contact" className="text-blue-600 dark:text-blue-400 hover:underline ml-1">
-                            {' '}
                             Say hi →
                         </Link>
                     </p>
