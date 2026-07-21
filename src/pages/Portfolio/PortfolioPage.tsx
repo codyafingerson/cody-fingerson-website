@@ -1,201 +1,201 @@
-import { motion } from 'framer-motion'
-import { useState, useEffect, useRef } from 'react'
-import PortfolioProjectItem, { ProjectSection, ProjectImage } from '../../components/PortfolioProjectItem'
-import { FaArrowUp, FaShare, FaCheck, FaChevronDown, FaChevronUp } from 'react-icons/fa'
+import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import PortfolioProjectItem, { ProjectSection, ProjectImage } from "../../components/PortfolioProjectItem";
+import { FaArrowUp, FaShare, FaCheck, FaChevronDown, FaChevronUp } from "react-icons/fa";
 
-type ProjectCategory = 'All' | 'UX Design' | 'Engineering' | 'Analytics'
+type ProjectCategory = "All" | "UX Design" | "Engineering" | "Analytics";
 
 export default function PortfolioPage() {
-    const [showBackToTop, setShowBackToTop] = useState(false)
+    const [showBackToTop, setShowBackToTop] = useState(false);
     const [expandedProjects, setExpandedProjects] = useState<Record<number, boolean>>({
         1: false,
         2: false,
-        3: false
-    })
-    const [activeFilter, setActiveFilter] = useState<ProjectCategory>('All')
-    const [copiedProjectId, setCopiedProjectId] = useState<number | null>(null)
-    const [shareError, setShareError] = useState<string | null>(null)
-    const mainRef = useRef<HTMLElement>(null)
-    const projectContentRefs = useRef<Record<number, HTMLDivElement | null>>({})
+        3: false,
+    });
+    const [activeFilter, setActiveFilter] = useState<ProjectCategory>("All");
+    const [copiedProjectId, setCopiedProjectId] = useState<number | null>(null);
+    const [shareError, setShareError] = useState<string | null>(null);
+    const mainRef = useRef<HTMLElement>(null);
+    const projectContentRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
     useEffect(() => {
         const handleScroll = () => {
-            setShowBackToTop(window.scrollY > 400)
-        }
+            setShowBackToTop(window.scrollY > 400);
+        };
 
-        window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     // Handle URL hash navigation on mount and when hash changes
     useEffect(() => {
         const handleHashChange = () => {
-            const hash = window.location.hash
+            const hash = window.location.hash;
             if (hash) {
-                const projectIdMatch = hash.match(/#project-(\d+)/)
+                const projectIdMatch = hash.match(/#project-(\d+)/);
                 if (projectIdMatch) {
-                    const projectId = parseInt(projectIdMatch[1], 10)
-                    const projectElement = document.getElementById(`project-${projectId}`)
+                    const projectId = parseInt(projectIdMatch[1], 10);
+                    const projectElement = document.getElementById(`project-${projectId}`);
                     if (projectElement) {
                         // Expand the project if it's collapsed
-                        setExpandedProjects(prev => {
+                        setExpandedProjects((prev) => {
                             if (!prev[projectId]) {
                                 // Scroll after expansion
                                 setTimeout(() => {
-                                    projectElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                                    projectElement.scrollIntoView({ behavior: "smooth", block: "start" });
                                     // Focus the content area for accessibility
-                                    const contentElement = projectContentRefs.current[projectId]
+                                    const contentElement = projectContentRefs.current[projectId];
                                     if (contentElement) {
-                                        contentElement.focus()
+                                        contentElement.focus();
                                     }
-                                }, 100)
-                                return { ...prev, [projectId]: true }
+                                }, 100);
+                                return { ...prev, [projectId]: true };
                             } else {
                                 // Already expanded, just scroll
                                 setTimeout(() => {
-                                    projectElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                                    const contentElement = projectContentRefs.current[projectId]
+                                    projectElement.scrollIntoView({ behavior: "smooth", block: "start" });
+                                    const contentElement = projectContentRefs.current[projectId];
                                     if (contentElement) {
-                                        contentElement.focus()
+                                        contentElement.focus();
                                     }
-                                }, 50)
-                                return prev
+                                }, 50);
+                                return prev;
                             }
-                        })
+                        });
                     }
                 }
             }
-        }
+        };
 
         // Check hash on mount
-        handleHashChange()
+        handleHashChange();
 
         // Listen for hash changes
-        window.addEventListener('hashchange', handleHashChange)
-        return () => window.removeEventListener('hashchange', handleHashChange)
+        window.addEventListener("hashchange", handleHashChange);
+        return () => window.removeEventListener("hashchange", handleHashChange);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []) // Only run on mount - hash changes are handled by hashchange event
+    }, []); // Only run on mount - hash changes are handled by hashchange event
 
     const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
 
     const toggleProject = (projectId: number) => {
-        const willExpand = !expandedProjects[projectId]
-        setExpandedProjects(prev => ({
+        const willExpand = !expandedProjects[projectId];
+        setExpandedProjects((prev) => ({
             ...prev,
-            [projectId]: !prev[projectId]
-        }))
+            [projectId]: !prev[projectId],
+        }));
 
         // Scroll management: if expanding, scroll to the project container so user sees the full project from the top
         if (willExpand) {
             setTimeout(() => {
-                const projectElement = document.getElementById(`project-${projectId}`)
+                const projectElement = document.getElementById(`project-${projectId}`);
                 if (projectElement) {
-                    projectElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                    projectElement.scrollIntoView({ behavior: "smooth", block: "start" });
                 }
-            }, 100)
+            }, 100);
         }
-    }
+    };
 
     const shareProject = async (projectId: number, title: string) => {
-        const url = `${window.location.origin}${window.location.pathname}#project-${projectId}`
-        setShareError(null)
+        const url = `${window.location.origin}${window.location.pathname}#project-${projectId}`;
+        setShareError(null);
 
         if (navigator.share) {
             try {
                 await navigator.share({
                     title: `${title} - Cody Fingerson Portfolio`,
-                    url: url
-                })
+                    url: url,
+                });
             } catch (err: any) {
                 // User cancelled (error name is 'AbortError') or other error occurred
-                if (err?.name !== 'AbortError') {
+                if (err?.name !== "AbortError") {
                     // Only copy if it wasn't a user cancellation
-                    copyToClipboard(url, projectId)
+                    copyToClipboard(url, projectId);
                 }
             }
         } else {
-            copyToClipboard(url, projectId)
+            copyToClipboard(url, projectId);
         }
-    }
+    };
 
     const copyToClipboard = (text: string, projectId: number) => {
         if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard
                 .writeText(text)
                 .then(() => {
-                    setCopiedProjectId(projectId)
-                    setShareError(null)
-                    setTimeout(() => setCopiedProjectId(null), 2000)
+                    setCopiedProjectId(projectId);
+                    setShareError(null);
+                    setTimeout(() => setCopiedProjectId(null), 2000);
                 })
-                .catch(err => {
-                    console.error('Failed to copy to clipboard:', err)
+                .catch((err) => {
+                    console.error("Failed to copy to clipboard:", err);
                     // Fallback: try using the older execCommand method
-                    const textArea = document.createElement('textarea')
-                    textArea.value = text
-                    textArea.style.position = 'fixed'
-                    textArea.style.left = '-999999px'
-                    document.body.appendChild(textArea)
-                    textArea.focus()
-                    textArea.select()
+                    const textArea = document.createElement("textarea");
+                    textArea.value = text;
+                    textArea.style.position = "fixed";
+                    textArea.style.left = "-999999px";
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
                     try {
-                        document.execCommand('copy')
-                        setCopiedProjectId(projectId)
-                        setShareError(null)
-                        setTimeout(() => setCopiedProjectId(null), 2000)
+                        document.execCommand("copy");
+                        setCopiedProjectId(projectId);
+                        setShareError(null);
+                        setTimeout(() => setCopiedProjectId(null), 2000);
                     } catch (e) {
-                        console.error('Fallback copy failed:', e)
-                        setShareError('Unable to copy link. Please try again.')
-                        setTimeout(() => setShareError(null), 3000)
+                        console.error("Fallback copy failed:", e);
+                        setShareError("Unable to copy link. Please try again.");
+                        setTimeout(() => setShareError(null), 3000);
                     }
-                    document.body.removeChild(textArea)
-                })
+                    document.body.removeChild(textArea);
+                });
         } else {
             // Fallback for browsers without clipboard API
-            const textArea = document.createElement('textarea')
-            textArea.value = text
-            textArea.style.position = 'fixed'
-            textArea.style.left = '-999999px'
-            document.body.appendChild(textArea)
-            textArea.focus()
-            textArea.select()
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
             try {
-                document.execCommand('copy')
-                setCopiedProjectId(projectId)
-                setShareError(null)
-                setTimeout(() => setCopiedProjectId(null), 2000)
+                document.execCommand("copy");
+                setCopiedProjectId(projectId);
+                setShareError(null);
+                setTimeout(() => setCopiedProjectId(null), 2000);
             } catch (e) {
-                console.error('Copy failed:', e)
-                setShareError('Unable to copy link. Please try again.')
-                setTimeout(() => setShareError(null), 3000)
+                console.error("Copy failed:", e);
+                setShareError("Unable to copy link. Please try again.");
+                setTimeout(() => setShareError(null), 3000);
             }
-            document.body.removeChild(textArea)
+            document.body.removeChild(textArea);
         }
-    }
+    };
 
     const projects = [
         {
             id: 1,
-            title: 'Focused Note App',
-            subtitle: 'CSCI 443 UX Design Course Project • Mobile/Web Prototype',
-            category: 'UX Design' as ProjectCategory
+            title: "Focused Note App",
+            subtitle: "CSCI 443 UX Design Course Project • Mobile/Web Prototype",
+            category: "UX Design" as ProjectCategory,
         },
         {
             id: 2,
-            title: 'QCL Calibration & Diagnostics Tool',
-            subtitle: 'Engineering Tooling • C# + WPF',
-            category: 'Engineering' as ProjectCategory
+            title: "QCL Calibration & Diagnostics Tool",
+            subtitle: "Engineering Tooling • C# + WPF",
+            category: "Engineering" as ProjectCategory,
         },
         {
             id: 3,
-            title: 'Internal Ticket Analytics & Reporting Tool',
-            subtitle: 'Python + PyQt • Desktop',
-            category: 'Analytics' as ProjectCategory
-        }
-    ]
+            title: "Internal Ticket Analytics & Reporting Tool",
+            subtitle: "Python + PyQt • Desktop",
+            category: "Analytics" as ProjectCategory,
+        },
+    ];
 
-    const filteredProjects = activeFilter === 'All' ? projects : projects.filter(p => p.category === activeFilter)
+    const filteredProjects = activeFilter === "All" ? projects : projects.filter((p) => p.category === activeFilter);
 
     return (
         <>
@@ -227,9 +227,9 @@ export default function PortfolioPage() {
                         <a
                             href="#about"
                             className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded px-2 py-1"
-                            onClick={e => {
-                                e.preventDefault()
-                                document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
+                            onClick={(e) => {
+                                e.preventDefault();
+                                document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
                             }}
                         >
                             About
@@ -237,9 +237,9 @@ export default function PortfolioPage() {
                         <a
                             href="#skills"
                             className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded px-2 py-1"
-                            onClick={e => {
-                                e.preventDefault()
-                                document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' })
+                            onClick={(e) => {
+                                e.preventDefault();
+                                document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" });
                             }}
                         >
                             Skills
@@ -247,9 +247,9 @@ export default function PortfolioPage() {
                         <a
                             href="#projects"
                             className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded px-2 py-1"
-                            onClick={e => {
-                                e.preventDefault()
-                                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
+                            onClick={(e) => {
+                                e.preventDefault();
+                                document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
                             }}
                         >
                             Projects
@@ -320,14 +320,14 @@ export default function PortfolioPage() {
                             role="group"
                             aria-label="Filter projects by category"
                         >
-                            {(['All', 'UX Design', 'Engineering', 'Analytics'] as ProjectCategory[]).map(category => (
+                            {(["All", "UX Design", "Engineering", "Analytics"] as ProjectCategory[]).map((category) => (
                                 <button
                                     key={category}
                                     onClick={() => setActiveFilter(category)}
                                     className={`px-4 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                                         activeFilter === category
-                                            ? 'bg-blue-600 text-white dark:bg-blue-500'
-                                            : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                                            ? "bg-blue-600 text-white dark:bg-blue-500"
+                                            : "bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
                                     }`}
                                     aria-pressed={activeFilter === category}
                                 >
@@ -343,7 +343,7 @@ export default function PortfolioPage() {
                                     No projects found in this category.
                                 </p>
                                 <button
-                                    onClick={() => setActiveFilter('All')}
+                                    onClick={() => setActiveFilter("All")}
                                     className="text-blue-600 dark:text-blue-400 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded px-2 py-1"
                                 >
                                     Show all projects
@@ -352,7 +352,7 @@ export default function PortfolioPage() {
                         )}
 
                         {/* Project 1 – Focused Note App (UX Course Project) */}
-                        {filteredProjects.some(p => p.id === 1) && (
+                        {filteredProjects.some((p) => p.id === 1) && (
                             <div id="project-1" className="print:break-inside-avoid">
                                 <div className="flex items-center justify-between mb-2 mt-6 print:hidden flex-wrap gap-2">
                                     <button
@@ -381,7 +381,7 @@ export default function PortfolioPage() {
                                         )}
                                         <button
                                             type="button"
-                                            onClick={() => shareProject(1, 'Focused Note App')}
+                                            onClick={() => shareProject(1, "Focused Note App")}
                                             className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded px-2 py-1"
                                             aria-label="Share Focused Note App project"
                                         >
@@ -420,11 +420,11 @@ export default function PortfolioPage() {
                                     {/* Rest of content - Collapsible */}
                                     <div
                                         id="project-1-content"
-                                        ref={el => {
-                                            projectContentRefs.current[1] = el
+                                        ref={(el) => {
+                                            projectContentRefs.current[1] = el;
                                         }}
                                         tabIndex={-1}
-                                        className={expandedProjects[1] ? '' : 'hidden print:block'}
+                                        className={expandedProjects[1] ? "" : "hidden print:block"}
                                     >
                                         {/* Tools used */}
                                         <ProjectSection title="Tools used">
@@ -448,7 +448,7 @@ export default function PortfolioPage() {
                                                 <li>
                                                     <span className="font-semibold dark:text-gray-200">
                                                         User interviews (5 participants)
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     aged 19–30, a mix of undergraduate students, a graduate student, and
                                                     early-career professionals who regularly use digital note-taking
                                                     tools. I focused on frequency of note taking, tools used,
@@ -457,7 +457,7 @@ export default function PortfolioPage() {
                                                 <li>
                                                     <span className="font-semibold dark:text-gray-200">
                                                         Empathy maps
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     created for each participant to capture what they say, think, feel,
                                                     and do around note-taking, helping to visualize emotional and
                                                     behavioral patterns.
@@ -465,7 +465,7 @@ export default function PortfolioPage() {
                                                 <li>
                                                     <span className="font-semibold dark:text-gray-200">
                                                         Persona generation
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     by synthesizing interview findings into a primary persona,
                                                     &quot;Sarah Kim,&quot; a 22-year-old student who wants a simple,
                                                     fast, and dependable note manager that doesn&apos;t get in her way.
@@ -473,7 +473,7 @@ export default function PortfolioPage() {
                                                 <li>
                                                     <span className="font-semibold dark:text-gray-200">
                                                         Business Model Canvas
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     focusing on value through clarity, speed, and effortless recall
                                                     rather than &quot;feature checklists.&quot; The target audience is
                                                     students and early-career professionals who feel overwhelmed by
@@ -490,18 +490,18 @@ export default function PortfolioPage() {
                                             </p>
                                             <ul className="list-disc list-inside space-y-1 text-gray-800 dark:text-gray-300">
                                                 <li>
-                                                    Created a{' '}
-                                                    <span className="font-semibold dark:text-gray-200">mind map</span>{' '}
+                                                    Created a{" "}
+                                                    <span className="font-semibold dark:text-gray-200">mind map</span>{" "}
                                                     centered on the core problem, branching into four main themes:
                                                     <span className="font-semibold dark:text-gray-200"> speed</span>,
                                                     <span className="font-semibold dark:text-gray-200">
-                                                        {' '}
+                                                        {" "}
                                                         organization
                                                     </span>
                                                     ,<span className="font-semibold dark:text-gray-200"> recall</span>,
                                                     and
                                                     <span className="font-semibold dark:text-gray-200">
-                                                        {' '}
+                                                        {" "}
                                                         simplicity
                                                     </span>
                                                     .
@@ -514,15 +514,15 @@ export default function PortfolioPage() {
                                                 <li>
                                                     Clustered similar ideas and prioritized those that balanced
                                                     desirability, feasibility, and usability, resulting in three main
-                                                    concepts:{' '}
+                                                    concepts:{" "}
                                                     <span className="font-semibold dark:text-gray-200">
                                                         Smart Note Capture
                                                     </span>
-                                                    ,{' '}
+                                                    ,{" "}
                                                     <span className="font-semibold dark:text-gray-200">
                                                         Lightning Search
                                                     </span>
-                                                    , and a{' '}
+                                                    , and a{" "}
                                                     <span className="font-semibold dark:text-gray-200">
                                                         Three-Pane Interface
                                                     </span>
@@ -549,7 +549,7 @@ export default function PortfolioPage() {
                                                 <li>
                                                     <span className="font-semibold dark:text-gray-200">
                                                         Low-fidelity wireframes (Frame0)
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     for the main notes view and the new note view. These explored the
                                                     three-pane layout that separates navigation (folders/tags), note
                                                     list, and editing/reading area to reduce cognitive load.
@@ -560,21 +560,21 @@ export default function PortfolioPage() {
                                                         <li>
                                                             <span className="font-semibold dark:text-gray-200">
                                                                 Fitts&apos;s Law
-                                                            </span>{' '}
+                                                            </span>{" "}
                                                             to size and place primary actions like &quot;New Note&quot;
                                                             and &quot;Save&quot; near the editing area.
                                                         </li>
                                                         <li>
                                                             <span className="font-semibold dark:text-gray-200">
                                                                 Hick&apos;s Law
-                                                            </span>{' '}
+                                                            </span>{" "}
                                                             to limit visible options on each screen and keep decisions
                                                             quick.
                                                         </li>
                                                         <li>
                                                             <span className="font-semibold dark:text-gray-200">
                                                                 Jacob&apos;s Law
-                                                            </span>{' '}
+                                                            </span>{" "}
                                                             by using patterns users expect (search bar at the top, left
                                                             navigation).
                                                         </li>
@@ -591,10 +591,10 @@ export default function PortfolioPage() {
                                             />
 
                                             <p className="text-gray-800 dark:text-gray-300 mb-2">
-                                                I then built a{' '}
+                                                I then built a{" "}
                                                 <span className="font-semibold dark:text-gray-200">
                                                     high-fidelity prototype in Figma
-                                                </span>{' '}
+                                                </span>{" "}
                                                 that added color, typography, spacing, and realistic content:
                                             </p>
                                             <ul className="list-disc list-inside space-y-1 text-gray-800 dark:text-gray-200">
@@ -647,64 +647,64 @@ export default function PortfolioPage() {
                                                 <li>
                                                     <span className="font-semibold dark:text-gray-200">
                                                         Visibility of system status:
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     live word/character counters and timestamps like &quot;Edited 2
                                                     hours ago&quot; to show activity and state.
                                                 </li>
                                                 <li>
                                                     <span className="font-semibold">
                                                         Match between system and the real world:
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     clear, familiar terms such as &quot;New Note,&quot;
                                                     &quot;Folders,&quot; and &quot;Tags&quot; with common icons.
                                                 </li>
                                                 <li>
                                                     <span className="font-semibold dark:text-gray-200">
                                                         User control and freedom:
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     explicit Cancel and Back options in editing views so users never
                                                     feel locked in.
                                                 </li>
                                                 <li>
                                                     <span className="font-semibold dark:text-gray-200">
                                                         Consistency and standards:
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     consistent layout, typography, and iconography across all screens,
                                                     following the Principle of Least Astonishment.
                                                 </li>
                                                 <li>
                                                     <span className="font-semibold dark:text-gray-200">
                                                         Error prevention:
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     &quot;Save Note&quot; is disabled until both a title and body are
                                                     present, reducing incomplete or accidental saves.
                                                 </li>
                                                 <li>
                                                     <span className="font-semibold">
                                                         Recognition rather than recall:
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     key navigation (folders, tags, search) is always visible, minimizing
                                                     memory load.
                                                 </li>
                                                 <li>
                                                     <span className="font-semibold dark:text-gray-200">
                                                         Flexibility and efficiency of use:
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     supports both beginners (visible controls) and advanced users
                                                     (keyboard shortcuts such as Cmd+S).
                                                 </li>
                                                 <li>
                                                     <span className="font-semibold">
                                                         Aesthetic and minimalist design:
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     minimal surfaces focused on the text and the main note pane, with
                                                     unnecessary decoration removed.
                                                 </li>
                                                 <li>
-                                                    Explicit use of{' '}
+                                                    Explicit use of{" "}
                                                     <span className="font-semibold dark:text-gray-200">
                                                         Fitts&apos;s Law, Hick&apos;s Law, and Jacob&apos;s Law
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     to size primary actions correctly, limit visible choices, and keep
                                                     patterns familiar.
                                                 </li>
@@ -729,7 +729,7 @@ export default function PortfolioPage() {
                         )}
 
                         {/* Project 2 – QCL Calibration & Diagnostics Tool */}
-                        {filteredProjects.some(p => p.id === 2) && (
+                        {filteredProjects.some((p) => p.id === 2) && (
                             <div id="project-2" className="print:break-inside-avoid">
                                 <div className="flex items-center justify-between mb-2 mt-6 print:hidden flex-wrap gap-2">
                                     <button
@@ -758,7 +758,7 @@ export default function PortfolioPage() {
                                         )}
                                         <button
                                             type="button"
-                                            onClick={() => shareProject(2, 'QCL Calibration & Diagnostics Tool')}
+                                            onClick={() => shareProject(2, "QCL Calibration & Diagnostics Tool")}
                                             className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded px-2 py-1"
                                             aria-label="Share QCL Calibration & Diagnostics Tool project"
                                         >
@@ -796,11 +796,11 @@ export default function PortfolioPage() {
                                     {/* Rest of content - Collapsible */}
                                     <div
                                         id="project-2-content"
-                                        ref={el => {
-                                            projectContentRefs.current[2] = el
+                                        ref={(el) => {
+                                            projectContentRefs.current[2] = el;
                                         }}
                                         tabIndex={-1}
-                                        className={expandedProjects[2] ? '' : 'hidden print:block'}
+                                        className={expandedProjects[2] ? "" : "hidden print:block"}
                                     >
                                         {/* Tools used */}
                                         <ProjectSection title="Tools used">
@@ -856,18 +856,18 @@ export default function PortfolioPage() {
                                             </p>
                                             <ul className="list-disc list-inside space-y-1 text-gray-800 dark:text-gray-300">
                                                 <li>
-                                                    Uses standard{' '}
+                                                    Uses standard{" "}
                                                     <span className="font-semibold dark:text-gray-200">
                                                         SCPI commands
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     over GPIB/IVI-VISA to communicate with laboratory instruments,
                                                     enabling automated sweeps and parameter adjustments.
                                                 </li>
                                                 <li>
-                                                    Employs{' '}
+                                                    Employs{" "}
                                                     <span className="font-semibold dark:text-gray-200">
                                                         multiple linear regression
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     to derive calibration coefficients from collected data, then applies
                                                     linear corrections before coefficients are written to the device.
                                                 </li>
@@ -903,35 +903,35 @@ export default function PortfolioPage() {
                                                 <li>
                                                     <span className="font-semibold dark:text-gray-200">
                                                         Visibility of system status:
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     live plots and status indicators that update as sweeps run and
                                                     coefficients are computed.
                                                 </li>
                                                 <li>
                                                     <span className="font-semibold dark:text-gray-200">
                                                         Error prevention:
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     guard rails around critical operations such as writing calibration
                                                     values, with confirmation steps and clear messaging.
                                                 </li>
                                                 <li>
                                                     <span className="font-semibold dark:text-gray-200">
                                                         Match to technician workflow:
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     panel ordering and control layout mirror how calibrations are
                                                     performed in the lab, reducing mental translation.
                                                 </li>
                                                 <li>
                                                     <span className="font-semibold dark:text-gray-200">
                                                         Recognition over recall:
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     parameter names, units, and labels follow existing lab conventions
                                                     to minimize learning curve.
                                                 </li>
                                                 <li>
                                                     <span className="font-semibold dark:text-gray-200">
                                                         Aesthetic and minimalist design:
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     dense information is organized into logical panels, avoiding
                                                     unnecessary decoration or non-essential data.
                                                 </li>
@@ -970,7 +970,7 @@ export default function PortfolioPage() {
                         )}
 
                         {/* Project 3 – Internal Ticket Analytics & Reporting Tool */}
-                        {filteredProjects.some(p => p.id === 3) && (
+                        {filteredProjects.some((p) => p.id === 3) && (
                             <div id="project-3" className="print:break-inside-avoid">
                                 <div className="flex items-center justify-between mb-2 mt-6 print:hidden flex-wrap gap-2">
                                     <button
@@ -1000,7 +1000,7 @@ export default function PortfolioPage() {
                                         <button
                                             type="button"
                                             onClick={() =>
-                                                shareProject(3, 'Internal Ticket Analytics & Reporting Tool')
+                                                shareProject(3, "Internal Ticket Analytics & Reporting Tool")
                                             }
                                             className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded px-2 py-1"
                                             aria-label="Share Internal Ticket Analytics & Reporting Tool project"
@@ -1038,11 +1038,11 @@ export default function PortfolioPage() {
                                     {/* Rest of content - Collapsible */}
                                     <div
                                         id="project-3-content"
-                                        ref={el => {
-                                            projectContentRefs.current[3] = el
+                                        ref={(el) => {
+                                            projectContentRefs.current[3] = el;
                                         }}
                                         tabIndex={-1}
-                                        className={expandedProjects[3] ? '' : 'hidden print:block'}
+                                        className={expandedProjects[3] ? "" : "hidden print:block"}
                                     >
                                         {/* Tools used */}
                                         <ProjectSection title="Tools used">
@@ -1157,35 +1157,35 @@ export default function PortfolioPage() {
                                                 <li>
                                                     <span className="font-semibold dark:text-gray-200">
                                                         Visibility of system status:
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     progress indicators during CSV loading and clear messages when
                                                     analysis completes.
                                                 </li>
                                                 <li>
                                                     <span className="font-semibold">
                                                         Match between system and the real world:
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     labels and options described in the language of support operations,
                                                     not database schemas.
                                                 </li>
                                                 <li>
                                                     <span className="font-semibold dark:text-gray-200">
                                                         Error prevention:
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     basic validation on CSV structure, with helpful messaging when
                                                     expected columns are missing.
                                                 </li>
                                                 <li>
                                                     <span className="font-semibold">
                                                         Recognition rather than recall:
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     analysis types and time ranges shown as explicit options rather than
                                                     buried in configuration files.
                                                 </li>
                                                 <li>
                                                     <span className="font-semibold">
                                                         Aesthetic and minimalist design:
-                                                    </span>{' '}
+                                                    </span>{" "}
                                                     limited number of controls per screen, focusing attention on charts
                                                     and key metrics.
                                                 </li>
@@ -1222,5 +1222,5 @@ export default function PortfolioPage() {
                 )}
             </motion.main>
         </>
-    )
+    );
 }

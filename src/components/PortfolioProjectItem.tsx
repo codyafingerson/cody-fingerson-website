@@ -1,10 +1,10 @@
-import { ReactNode, useState, useEffect } from 'react'
-import { FaTimes } from 'react-icons/fa'
+import { ReactNode, useState, useEffect } from "react";
+import { FaTimes } from "react-icons/fa";
 
 interface ProjectItemProps {
-    title: string
-    subtitle: string
-    children: ReactNode
+    title: string;
+    subtitle: string;
+    children: ReactNode;
 }
 
 export default function PortfolioProjectItem({ title, subtitle, children }: ProjectItemProps) {
@@ -16,12 +16,12 @@ export default function PortfolioProjectItem({ title, subtitle, children }: Proj
             </header>
             {children}
         </article>
-    )
+    );
 }
 
 interface ProjectSectionProps {
-    title: string
-    children: ReactNode
+    title: string;
+    children: ReactNode;
 }
 
 export function ProjectSection({ title, children }: ProjectSectionProps) {
@@ -30,43 +30,43 @@ export function ProjectSection({ title, children }: ProjectSectionProps) {
             <h4 className="font-semibold mb-1 dark:text-gray-200">{title}</h4>
             {children}
         </div>
-    )
+    );
 }
 
 interface ProjectImageProps {
-    src: string
-    alt: string
-    caption?: string
-    className?: string
+    src: string;
+    alt: string;
+    caption?: string;
+    className?: string;
 }
 
-export function ProjectImage({ src, alt, caption, className = '' }: ProjectImageProps) {
-    const [hasError, setHasError] = useState(false)
-    const [isLoading, setIsLoading] = useState(true)
-    const [isModalOpen, setIsModalOpen] = useState(false)
+export function ProjectImage({ src, alt, caption, className = "" }: ProjectImageProps) {
+    const [hasError, setHasError] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Prevent body scroll when modal is open
     useEffect(() => {
         if (isModalOpen) {
-            document.body.style.overflow = 'hidden'
+            document.body.style.overflow = "hidden";
         } else {
-            document.body.style.overflow = 'unset'
+            document.body.style.overflow = "unset";
         }
         return () => {
-            document.body.style.overflow = 'unset'
-        }
-    }, [isModalOpen])
+            document.body.style.overflow = "unset";
+        };
+    }, [isModalOpen]);
 
     // Handle ESC key to close modal
     useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
-            if (e.key === 'Escape' && isModalOpen) {
-                setIsModalOpen(false)
+            if (e.key === "Escape" && isModalOpen) {
+                setIsModalOpen(false);
             }
-        }
-        window.addEventListener('keydown', handleEscape)
-        return () => window.removeEventListener('keydown', handleEscape)
-    }, [isModalOpen])
+        };
+        window.addEventListener("keydown", handleEscape);
+        return () => window.removeEventListener("keydown", handleEscape);
+    }, [isModalOpen]);
 
     if (hasError) {
         return (
@@ -75,7 +75,7 @@ export function ProjectImage({ src, alt, caption, className = '' }: ProjectImage
             >
                 <p className="text-gray-600 dark:text-gray-400">Image unavailable</p>
             </div>
-        )
+        );
     }
 
     return (
@@ -86,19 +86,19 @@ export function ProjectImage({ src, alt, caption, className = '' }: ProjectImage
                     <img
                         src={src}
                         alt={alt}
-                        className={`w-full cursor-pointer transition-opacity hover:opacity-90 ${isLoading ? 'hidden' : ''}`}
+                        className={`w-full cursor-pointer transition-opacity hover:opacity-90 ${isLoading ? "hidden" : ""}`}
                         onClick={() => setIsModalOpen(true)}
                         onLoad={() => setIsLoading(false)}
                         onError={() => {
-                            setHasError(true)
-                            setIsLoading(false)
+                            setHasError(true);
+                            setIsLoading(false);
                         }}
                         role="button"
                         tabIndex={0}
-                        onKeyDown={e => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                                e.preventDefault()
-                                setIsModalOpen(true)
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                setIsModalOpen(true);
                             }
                         }}
                         aria-label={`Click to view ${alt} in larger size`}
@@ -129,7 +129,7 @@ export function ProjectImage({ src, alt, caption, className = '' }: ProjectImage
                     </button>
                     <div
                         className="relative max-w-full max-h-[85vh] flex flex-col items-center"
-                        onClick={e => e.stopPropagation()}
+                        onClick={(e) => e.stopPropagation()}
                     >
                         <img src={src} alt={alt} className="max-w-full max-h-[80vh] object-contain" />
                         {caption && (
@@ -141,5 +141,5 @@ export function ProjectImage({ src, alt, caption, className = '' }: ProjectImage
                 </div>
             )}
         </>
-    )
+    );
 }

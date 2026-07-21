@@ -1,24 +1,24 @@
-import { Routes, Route, useLocation } from 'react-router-dom'
-import { AnimatePresence } from 'framer-motion'
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 
 /* -- Pages -- */
-import HomePage from './pages/HomePage'
-import AboutPage from './pages/AboutPage'
-import ProjectsPage from './pages/ProjectsPage'
-import ContactPage from './pages/ContactPage'
-import CatchAllPage from './pages/CatchAllPage'
-import PlaygroundPage from './pages/Interpreter/PlaygroundPage'
-import SettingsPage from './pages/Interpreter/SettingsPage'
-import PortfolioPage from './pages/Portfolio/PortfolioPage'
+import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
+import ProjectsPage from "./pages/ProjectsPage";
+import ContactPage from "./pages/ContactPage";
+import CatchAllPage from "./pages/CatchAllPage";
+import PlaygroundPage from "./pages/Interpreter/PlaygroundPage";
+import SettingsPage from "./pages/Interpreter/SettingsPage";
+import PortfolioPage from "./pages/Portfolio/PortfolioPage";
 
 /* -- Global Components -- */
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import InterpreterPage from './pages/Interpreter/InterpreterPage'
-import InterpreterLayout from './components/InterpreterLayout'
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import InterpreterPage from "./pages/Interpreter/InterpreterPage";
+import InterpreterLayout from "./components/InterpreterLayout";
 
 export default function App() {
-    const location = useLocation()
+    const location = useLocation();
     return (
         <div className="flex flex-col min-h-screen">
             <Navbar />
@@ -42,5 +42,5 @@ export default function App() {
             </main>
             <Footer />
         </div>
-    )
+    );
 }

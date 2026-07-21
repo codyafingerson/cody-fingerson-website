@@ -1,5 +1,5 @@
-import { ChangeEvent, useContext, useState } from 'react'
-import { CodeEditorThemeContext, ThemeKey } from '../../context/CodeEditorThemeContext'
+import { ChangeEvent, useContext, useState } from "react";
+import { CodeEditorThemeContext, ThemeKey } from "../../context/CodeEditorThemeContext";
 
 /**
  * Renders a settings page where users can select the code editor theme and font size.
@@ -7,42 +7,42 @@ import { CodeEditorThemeContext, ThemeKey } from '../../context/CodeEditorThemeC
  */
 export default function SettingsPage() {
     // Destructure existing theme values and setters from the context
-    const { theme: currentTheme, setTheme: applyTheme } = useContext(CodeEditorThemeContext)
-    const { fontSize: currentFontSize, setFontSize: applyFontSize } = useContext(CodeEditorThemeContext)
+    const { theme: currentTheme, setTheme: applyTheme } = useContext(CodeEditorThemeContext);
+    const { fontSize: currentFontSize, setFontSize: applyFontSize } = useContext(CodeEditorThemeContext);
 
     // Local state for pending changes
-    const [pendingTheme, setPendingTheme] = useState<ThemeKey>(currentTheme)
-    const [pendingFontSize, setPendingFontSize] = useState<number>(currentFontSize)
-    const [successMessage, setSuccessMessage] = useState<string | null>(null)
+    const [pendingTheme, setPendingTheme] = useState<ThemeKey>(currentTheme);
+    const [pendingFontSize, setPendingFontSize] = useState<number>(currentFontSize);
+    const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
     /**
      * Handles the theme selection from the dropdown.
      * @param e The select element change event.
      */
     const handleThemeChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        setPendingTheme(e.target.value as ThemeKey)
-    }
+        setPendingTheme(e.target.value as ThemeKey);
+    };
 
     /**
      * Handles changes to the font size input.
      * @param e The input element change event.
      */
     const handleFontSizeChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setPendingFontSize(Number(e.target.value))
-    }
+        setPendingFontSize(Number(e.target.value));
+    };
 
     /**
      * Persists theme and font size changes by calling context setters.
      * Displays a success message for 3 seconds.
      */
     const handleSaveChanges = () => {
-        applyTheme(pendingTheme)
-        applyFontSize(pendingFontSize)
-        setSuccessMessage('Settings saved successfully!')
+        applyTheme(pendingTheme);
+        applyFontSize(pendingFontSize);
+        setSuccessMessage("Settings saved successfully!");
         setTimeout(() => {
-            setSuccessMessage(null)
-        }, 3000)
-    }
+            setSuccessMessage(null);
+        }, 3000);
+    };
 
     return (
         <div className="mb-5 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
@@ -81,5 +81,5 @@ export default function SettingsPage() {
                 Save Changes
             </button>
         </div>
-    )
+    );
 }

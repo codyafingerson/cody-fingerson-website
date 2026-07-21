@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 export default function ContactPage() {
     return (
@@ -51,5 +51,5 @@ export default function ContactPage() {
                 </div>
             </form>
         </motion.section>
-    )
+    );
 }

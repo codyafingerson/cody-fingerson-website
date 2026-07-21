@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedin } from 'react-icons/fa'
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function Footer() {
     return (
@@ -25,5 +25,5 @@ export default function Footer() {
                 <div>&copy; {new Date().getFullYear()} Cody A. Fingerson</div>
             </div>
         </footer>
-    )
+    );
 }

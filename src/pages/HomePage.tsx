@@ -1,26 +1,36 @@
-import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
-const languages = ['Java', 'TypeScript', 'JavaScript', 'Python', 'Bash', 'HTML', 'CSS', 'C', 'C#']
+const languages = ["Java", "TypeScript", "JavaScript", "Python", "Bash", "HTML", "CSS", "C", "C#"];
 
-const frameworksAndLibs = ['React', 'Node.js', 'HTMX', 'Express', 'Spring Boot', 'Vue', 'Next.js', 'WPF', 'TailwindCSS']
+const frameworksAndLibs = [
+    "React",
+    "Node.js",
+    "HTMX",
+    "Express",
+    "Spring Boot",
+    "Vue",
+    "Next.js",
+    "WPF",
+    "TailwindCSS",
+];
 
 const toolsAndTech = [
-    'Docker',
-    'Git',
-    'MongoDB',
-    'PostgreSQL',
-    'Redis',
-    'MySQL',
-    'GitHub Actions',
-    'Jest',
-    'JUnit',
-    'Addigy MDM',
-    'Google Workspace'
-]
+    "Docker",
+    "Git",
+    "MongoDB",
+    "PostgreSQL",
+    "Redis",
+    "MySQL",
+    "GitHub Actions",
+    "Jest",
+    "JUnit",
+    "Addigy MDM",
+    "Google Workspace",
+];
 
 const badgeStyle =
-    'bg-gray-200 dark:bg-slate-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm'
+    "bg-gray-200 dark:bg-slate-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm";
 
 export default function HomePage() {
     return (
@@ -64,7 +74,7 @@ export default function HomePage() {
                 <div className="mb-10">
                     <h3 className="text-xl font-semibold text-center mb-5 dark:text-gray-300">Languages</h3>
                     <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-                        {languages.map(tech => (
+                        {languages.map((tech) => (
                             <span key={tech} className={badgeStyle}>
                                 {tech}
                             </span>
@@ -78,7 +88,7 @@ export default function HomePage() {
                         Frameworks & Libraries
                     </h3>
                     <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-                        {frameworksAndLibs.map(tech => (
+                        {frameworksAndLibs.map((tech) => (
                             <span key={tech} className={badgeStyle}>
                                 {tech}
                             </span>
@@ -90,7 +100,7 @@ export default function HomePage() {
                 <div>
                     <h3 className="text-xl font-semibold text-center mb-5 dark:text-gray-300">Tools & Technologies</h3>
                     <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-                        {toolsAndTech.map(tech => (
+                        {toolsAndTech.map((tech) => (
                             <span key={tech} className={badgeStyle}>
                                 {tech}
                             </span>
@@ -99,5 +109,5 @@ export default function HomePage() {
                 </div>
             </motion.section>
         </div>
-    )
+    );
 }
