@@ -224,36 +224,33 @@ export default function PortfolioPage() {
                     className="sticky top-0 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 py-3 print:hidden"
                 >
                     <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm">
-                        <a
-                            href="#about"
-                            className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded px-2 py-1"
-                            onClick={(e) => {
-                                e.preventDefault();
+                        <button
+                            type="button"
+                            className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded px-2 py-1 cursor-pointer bg-transparent border-none"
+                            onClick={() => {
                                 document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
                             }}
                         >
                             About
-                        </a>
-                        <a
-                            href="#skills"
-                            className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded px-2 py-1"
-                            onClick={(e) => {
-                                e.preventDefault();
+                        </button>
+                        <button
+                            type="button"
+                            className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded px-2 py-1 cursor-pointer bg-transparent border-none"
+                            onClick={() => {
                                 document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" });
                             }}
                         >
                             Skills
-                        </a>
-                        <a
-                            href="#projects"
-                            className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded px-2 py-1"
-                            onClick={(e) => {
-                                e.preventDefault();
+                        </button>
+                        <button
+                            type="button"
+                            className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded px-2 py-1 cursor-pointer bg-transparent border-none"
+                            onClick={() => {
                                 document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
                             }}
                         >
                             Projects
-                        </a>
+                        </button>
                     </div>
                 </nav>
 
@@ -315,14 +312,14 @@ export default function PortfolioPage() {
                         </h2>
 
                         {/* Filter Buttons */}
-                        <div
+                        <fieldset
                             className="flex flex-wrap gap-2 mb-8 print:hidden"
-                            role="group"
                             aria-label="Filter projects by category"
                         >
                             {(["All", "UX Design", "Engineering", "Analytics"] as ProjectCategory[]).map((category) => (
                                 <button
                                     key={category}
+                                    type="button"
                                     onClick={() => setActiveFilter(category)}
                                     className={`px-4 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                                         activeFilter === category
@@ -334,7 +331,7 @@ export default function PortfolioPage() {
                                     {category}
                                 </button>
                             ))}
-                        </div>
+                        </fieldset>
 
                         {/* Empty State */}
                         {filteredProjects.length === 0 && (
@@ -343,6 +340,7 @@ export default function PortfolioPage() {
                                     No projects found in this category.
                                 </p>
                                 <button
+                                    type="button"
                                     onClick={() => setActiveFilter("All")}
                                     className="text-blue-600 dark:text-blue-400 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded px-2 py-1"
                                 >
@@ -356,6 +354,7 @@ export default function PortfolioPage() {
                             <div id="project-1" className="print:break-inside-avoid">
                                 <div className="flex items-center justify-between mb-2 mt-6 print:hidden flex-wrap gap-2">
                                     <button
+                                        type="button"
                                         onClick={() => toggleProject(1)}
                                         className="flex items-center gap-1 text-sm text-blue-600 dark:text-blue-400 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded px-2 py-1"
                                         aria-expanded={expandedProjects[1]}
@@ -733,6 +732,7 @@ export default function PortfolioPage() {
                             <div id="project-2" className="print:break-inside-avoid">
                                 <div className="flex items-center justify-between mb-2 mt-6 print:hidden flex-wrap gap-2">
                                     <button
+                                        type="button"
                                         onClick={() => toggleProject(2)}
                                         className="flex items-center gap-1 text-sm text-blue-600 dark:text-blue-400 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded px-2 py-1"
                                         aria-expanded={expandedProjects[2]}
@@ -974,6 +974,7 @@ export default function PortfolioPage() {
                             <div id="project-3" className="print:break-inside-avoid">
                                 <div className="flex items-center justify-between mb-2 mt-6 print:hidden flex-wrap gap-2">
                                     <button
+                                        type="button"
                                         onClick={() => toggleProject(3)}
                                         className="flex items-center gap-1 text-sm text-blue-600 dark:text-blue-400 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded px-2 py-1"
                                         aria-expanded={expandedProjects[3]}
@@ -1213,6 +1214,7 @@ export default function PortfolioPage() {
                 {/* Back to Top Button */}
                 {showBackToTop && (
                     <button
+                        type="button"
                         onClick={scrollToTop}
                         className="fixed bottom-8 right-8 z-50 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 print:hidden focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                         aria-label="Back to top"

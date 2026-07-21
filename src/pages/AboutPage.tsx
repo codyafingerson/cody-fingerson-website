@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import headshot from "../assets/headshot.jpg"; // adjust to match your path
+import headshot from "../assets/headshot.jpg";
 
 export default function AboutPage() {
     return (
