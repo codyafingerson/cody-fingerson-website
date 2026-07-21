@@ -93,8 +93,6 @@ export function ProjectImage({ src, alt, caption, className = "" }: ProjectImage
                             setHasError(true);
                             setIsLoading(false);
                         }}
-                        role="button"
-                        tabIndex={0}
                         onKeyDown={(e) => {
                             if (e.key === "Enter" || e.key === " ") {
                                 e.preventDefault();
@@ -116,19 +114,26 @@ export function ProjectImage({ src, alt, caption, className = "" }: ProjectImage
                 <div
                     className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black bg-opacity-90 p-4"
                     onClick={() => setIsModalOpen(false)}
+                    onKeyDown={(e) => {
+                        if (e.key === "Escape") {
+                            setIsModalOpen(false);
+                        }
+                    }}
                     role="dialog"
                     aria-modal="true"
                     aria-label={`Viewing ${alt}`}
                 >
                     <button
+                        type="button"
                         onClick={() => setIsModalOpen(false)}
                         className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black rounded p-2 z-10"
                         aria-label="Close image viewer"
                     >
                         <FaTimes size={24} />
                     </button>
-                    <div
-                        className="relative max-w-full max-h-[85vh] flex flex-col items-center"
+                    <button
+                        type="button"
+                        className="relative max-w-full max-h-[85vh] flex flex-col items-center bg-transparent border-0 p-0 cursor-default"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <img src={src} alt={alt} className="max-w-full max-h-[80vh] object-contain" />
@@ -137,7 +142,7 @@ export function ProjectImage({ src, alt, caption, className = "" }: ProjectImage
                                 {caption}
                             </figcaption>
                         )}
-                    </div>
+                    </button>
                 </div>
             )}
         </>

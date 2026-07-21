@@ -43,7 +43,17 @@ export default function PlaygroundPage() {
      * @param error Any kind of thrown error
      * @returns Readable error message
      */
-    const errorFormatter = (error: any): string => `Error: ${error?.message || String(error)}`;
+    const errorFormatter = useCallback((error: unknown): string => {
+        if (error instanceof Error) {
+            return `Error: ${error.message}`;
+        }
+
+        if (typeof error === "object" && error !== null && "message" in error) {
+            return `Error: ${String((error as { message?: unknown }).message ?? error)}`;
+        }
+
+        return `Error: ${String(error)}`;
+    }, []);
 
     /**
      * Retrieves sample code from /sample-code.cos via a fetch request
@@ -60,7 +70,7 @@ export default function PlaygroundPage() {
             }
             const text = await response.text();
             setCode(text);
-        } catch (error: any) {
+        } catch (error: unknown) {
             setOutput(errorFormatter(error));
         } finally {
             setIsLoadingSample(false);
@@ -102,7 +112,7 @@ export default function PlaygroundPage() {
                     result = processor[runnerName]();
                 }
                 setOutput(result);
-            } catch (error: any) {
+            } catch (error: unknown) {
                 setOutput(errorFormatter(error));
                 setShowCompileMessage(false);
             } finally {
@@ -139,6 +149,7 @@ export default function PlaygroundPage() {
             {/* Buttons for loading sample code or clearing the editor */}
             <div className="mt-4 space-x-2 mb-3">
                 <button
+                    type="button"
                     onClick={loadSampleCode}
                     disabled={isLoadingSample || isRunningCode}
                     title="Load sample code (Optional)"
@@ -149,6 +160,7 @@ export default function PlaygroundPage() {
                     {isLoadingSample ? "Loading..." : "Load Sample Code"}
                 </button>
                 <button
+                    type="button"
                     onClick={clear}
                     disabled={isLoadingSample || isRunningCode}
                     title="Clear the code and output (Optional)"
@@ -168,6 +180,7 @@ export default function PlaygroundPage() {
             <div className="mt-4 space-x-2">
                 {/* Tokenize Button */}
                 <button
+                    type="button"
                     onClick={() => handleRun("runLexer")}
                     disabled={isRunningCode || isLoadingSample || !code.trim()}
                     title="Tokenize the code (Optional)"
@@ -187,6 +200,7 @@ export default function PlaygroundPage() {
 
                 {/* Parse Button */}
                 <button
+                    type="button"
                     onClick={() => handleRun("runParser")}
                     disabled={isRunningCode || isLoadingSample || !code.trim()}
                     title="Parse the code (Optional)"
@@ -206,6 +220,7 @@ export default function PlaygroundPage() {
 
                 {/* Execute Button - interprets the code */}
                 <button
+                    type="button"
                     onClick={() => handleRun("runRuntime")}
                     disabled={isRunningCode || isLoadingSample || !code.trim()}
                     title="Run the code using the interpreter"
@@ -225,6 +240,7 @@ export default function PlaygroundPage() {
 
                 {/* Compile Button - generates and runs JavaScript code */}
                 <button
+                    type="button"
                     onClick={() => handleRun("runCompiler")}
                     disabled={isRunningCode || isLoadingSample || !code.trim()}
                     title="Compile the code to JavaScript, and executes it as JavaScript"
