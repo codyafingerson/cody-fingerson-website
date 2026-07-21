@@ -1,40 +1,40 @@
-import { useState, useEffect, useRef } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
-import { FaBars, FaTimes } from 'react-icons/fa'
+import { useState, useEffect, useRef } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const routes = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About' },
-    { path: '/projects', label: 'Projects' },
-    { path: '/contact', label: 'Contact' },
-    { path: '/interpreter', label: 'Interpreter' }
-]
+    { path: "/", label: "Home" },
+    { path: "/about", label: "About" },
+    { path: "/projects", label: "Projects" },
+    { path: "/contact", label: "Contact" },
+    { path: "/interpreter", label: "Interpreter" },
+];
 
 export default function Navbar() {
-    const [isOpen, setIsOpen] = useState(false)
-    const mobileMenuRef = useRef<HTMLDivElement | null>(null)
-    const location = useLocation()
+    const [isOpen, setIsOpen] = useState(false);
+    const mobileMenuRef = useRef<HTMLDivElement | null>(null);
+    const location = useLocation();
 
     const toggleMenu = () => {
-        setIsOpen(!isOpen)
-    }
+        setIsOpen(!isOpen);
+    };
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
-                setIsOpen(false)
+                setIsOpen(false);
             }
-        }
+        };
 
-        document.addEventListener('mousedown', handleClickOutside)
+        document.addEventListener("mousedown", handleClickOutside);
 
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside)
-        }
-    }, [mobileMenuRef])
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [mobileMenuRef]);
 
-    if (location.pathname === '/portfolio') {
-        return ''
+    if (location.pathname === "/portfolio") {
+        return "";
     }
 
     return (
@@ -51,8 +51,8 @@ export default function Navbar() {
                                     to={path}
                                     className={({ isActive }) =>
                                         isActive
-                                            ? 'text-blue-600 border-b-2 border-blue-600 pb-1 dark:text-blue-400 dark:border-blue-400'
-                                            : 'hover:text-blue-500 transition dark:hover:text-blue-300'
+                                            ? "text-blue-600 border-b-2 border-blue-600 pb-1 dark:text-blue-400 dark:border-blue-400"
+                                            : "hover:text-blue-500 transition dark:hover:text-blue-300"
                                     }
                                 >
                                     {label}
@@ -75,7 +75,7 @@ export default function Navbar() {
             {/* Mobile Menu */}
             <div
                 ref={mobileMenuRef}
-                className={`${isOpen ? 'block' : 'hidden'} md:hidden absolute top-full left-0 right-0 bg-white dark:bg-slate-900 shadow-md dark:border-gray-700 dark:border-t`}
+                className={`${isOpen ? "block" : "hidden"} md:hidden absolute top-full left-0 right-0 bg-white dark:bg-slate-900 shadow-md dark:border-gray-700 dark:border-t`}
             >
                 <nav>
                     <ul className="flex flex-col items-center space-y-4 py-4">
@@ -87,8 +87,8 @@ export default function Navbar() {
                                     className={({ isActive }) =>
                                         `block w-full text-center py-2 ${
                                             isActive
-                                                ? 'text-blue-600 font-semibold dark:text-blue-400'
-                                                : 'hover:text-blue-500 transition dark:hover:text-blue-300'
+                                                ? "text-blue-600 font-semibold dark:text-blue-400"
+                                                : "hover:text-blue-500 transition dark:hover:text-blue-300"
                                         }`
                                     }
                                 >
@@ -100,5 +100,5 @@ export default function Navbar() {
                 </nav>
             </div>
         </header>
-    )
+    );
 }

@@ -1,13 +1,13 @@
-import { motion } from 'framer-motion'
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
-import { Project } from '../data/projects'
+import { motion } from "framer-motion";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { Project } from "../data/projects";
 
 interface ProjectCardProps {
-    project: Project
+    project: Project;
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
-    const descriptionWithBreaks = project.description.replace(/\n/g, '<br />')
+    const descriptionWithBreaks = project.description.replace(/\n/g, "<br />");
 
     return (
         <motion.div
@@ -50,5 +50,5 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 )}
             </div>
         </motion.div>
-    )
+    );
 }

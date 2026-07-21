@@ -1,9 +1,9 @@
-import { useState, useCallback } from 'react'
-import CodeEditor from '../../components/CodeEditor'
-import { CodeProcessor } from '../../utils/codeProcessor'
-import { FaInfoCircle, FaExclamationCircle } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { useState, useCallback } from "react";
+import CodeEditor from "../../components/CodeEditor";
+import { CodeProcessor } from "../../utils/codeProcessor";
+import { FaInfoCircle, FaExclamationCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 /**
  * Renders a playground where users can write code and perform actions:
@@ -16,65 +16,65 @@ export default function PlaygroundPage() {
     /**
      * The current code in the editor
      */
-    const [code, setCode] = useState('')
+    const [code, setCode] = useState("");
 
     /**
      * The output to display, updated by interpreter/lexer/parser/compiler
      */
-    const [output, setOutput] = useState('')
+    const [output, setOutput] = useState("");
 
     /**
      * Indicates if sample code is in the process of loading
      */
-    const [isLoadingSample, setIsLoadingSample] = useState(false)
+    const [isLoadingSample, setIsLoadingSample] = useState(false);
 
     /**
      * Indicates if code is running (tokenizing, parsing, executing, or compiling)
      */
-    const [isRunningCode, setIsRunningCode] = useState(false)
+    const [isRunningCode, setIsRunningCode] = useState(false);
 
     /**
      * Controls the visibility of the "Compile" message
      */
-    const [showCompileMessage, setShowCompileMessage] = useState(false)
+    const [showCompileMessage, setShowCompileMessage] = useState(false);
 
     /**
      * Formats and returns a string for errors encountered
      * @param error Any kind of thrown error
      * @returns Readable error message
      */
-    const errorFormatter = (error: any): string => `Error: ${error?.message || String(error)}`
+    const errorFormatter = (error: any): string => `Error: ${error?.message || String(error)}`;
 
     /**
      * Retrieves sample code from /sample-code.cos via a fetch request
      * and sets the editor content to the loaded code
      */
     const loadSampleCode = useCallback(async () => {
-        setIsLoadingSample(true)
-        setOutput('')
-        setShowCompileMessage(false)
+        setIsLoadingSample(true);
+        setOutput("");
+        setShowCompileMessage(false);
         try {
-            const response = await fetch('/sample-code.cos')
+            const response = await fetch("/sample-code.cos");
             if (!response.ok) {
-                throw new Error(`Failed to load sample code (status: ${response.status})`)
+                throw new Error(`Failed to load sample code (status: ${response.status})`);
             }
-            const text = await response.text()
-            setCode(text)
+            const text = await response.text();
+            setCode(text);
         } catch (error: any) {
-            setOutput(errorFormatter(error))
+            setOutput(errorFormatter(error));
         } finally {
-            setIsLoadingSample(false)
+            setIsLoadingSample(false);
         }
-    }, [errorFormatter])
+    }, [errorFormatter]);
 
     /**
      * Clears the editor and output
      */
     const clear = useCallback(() => {
-        setCode('')
-        setOutput('')
-        setShowCompileMessage(false)
-    }, [])
+        setCode("");
+        setOutput("");
+        setShowCompileMessage(false);
+    }, []);
 
     /**
      * Runs code using one of the CodeProcessor methods (lexer, parser, runtime, or compiler)
@@ -82,35 +82,35 @@ export default function PlaygroundPage() {
      */
     const handleRun = useCallback(
         async (runnerName: keyof CodeProcessor) => {
-            setIsRunningCode(true)
-            setOutput('')
-            setShowCompileMessage(false)
+            setIsRunningCode(true);
+            setOutput("");
+            setShowCompileMessage(false);
 
-            if (runnerName === 'runCompiler') {
-                setShowCompileMessage(true)
+            if (runnerName === "runCompiler") {
+                setShowCompileMessage(true);
             }
 
             try {
-                const processor = new CodeProcessor(code)
-                let result: string
-                if (runnerName === 'runRuntime') {
+                const processor = new CodeProcessor(code);
+                let result: string;
+                if (runnerName === "runRuntime") {
                     // Runtime can provide incremental output
                     result = processor.runRuntime((msg: string) => {
-                        setOutput(prev => prev + msg + '\n')
-                    })
+                        setOutput((prev) => prev + msg + "\n");
+                    });
                 } else {
-                    result = processor[runnerName]()
+                    result = processor[runnerName]();
                 }
-                setOutput(result)
+                setOutput(result);
             } catch (error: any) {
-                setOutput(errorFormatter(error))
-                setShowCompileMessage(false)
+                setOutput(errorFormatter(error));
+                setShowCompileMessage(false);
             } finally {
-                setIsRunningCode(false)
+                setIsRunningCode(false);
             }
         },
-        [code, errorFormatter]
-    )
+        [code, errorFormatter],
+    );
 
     return (
         <>
@@ -129,10 +129,10 @@ export default function PlaygroundPage() {
 
             {/* Link to settings page where the user can change the code editor theme */}
             <p className="mt-4 text-gray-500 italic">
-                Tip: You can change the theme of the code editor on the{' '}
+                Tip: You can change the theme of the code editor on the{" "}
                 <Link to="/interpreter/settings" className="text-blue-500 hover:underline">
                     Settings
-                </Link>{' '}
+                </Link>{" "}
                 page.
             </p>
 
@@ -146,7 +146,7 @@ export default function PlaygroundPage() {
                     font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 
                     dark:focus:ring-green-800 cursor-pointer"
                 >
-                    {isLoadingSample ? 'Loading...' : 'Load Sample Code'}
+                    {isLoadingSample ? "Loading..." : "Load Sample Code"}
                 </button>
                 <button
                     onClick={clear}
@@ -168,7 +168,7 @@ export default function PlaygroundPage() {
             <div className="mt-4 space-x-2">
                 {/* Tokenize Button */}
                 <button
-                    onClick={() => handleRun('runLexer')}
+                    onClick={() => handleRun("runLexer")}
                     disabled={isRunningCode || isLoadingSample || !code.trim()}
                     title="Tokenize the code (Optional)"
                     className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm 
@@ -181,13 +181,13 @@ export default function PlaygroundPage() {
                         className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 
                         rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent"
                     >
-                        {isRunningCode ? 'Running...' : 'Tokenize'}
+                        {isRunningCode ? "Running..." : "Tokenize"}
                     </span>
                 </button>
 
                 {/* Parse Button */}
                 <button
-                    onClick={() => handleRun('runParser')}
+                    onClick={() => handleRun("runParser")}
                     disabled={isRunningCode || isLoadingSample || !code.trim()}
                     title="Parse the code (Optional)"
                     className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm 
@@ -200,13 +200,13 @@ export default function PlaygroundPage() {
                         className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 
                         rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent"
                     >
-                        {isRunningCode ? 'Running...' : 'Parse'}
+                        {isRunningCode ? "Running..." : "Parse"}
                     </span>
                 </button>
 
                 {/* Execute Button - interprets the code */}
                 <button
-                    onClick={() => handleRun('runRuntime')}
+                    onClick={() => handleRun("runRuntime")}
                     disabled={isRunningCode || isLoadingSample || !code.trim()}
                     title="Run the code using the interpreter"
                     className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm 
@@ -219,13 +219,13 @@ export default function PlaygroundPage() {
                         className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 
                         rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent"
                     >
-                        {isRunningCode ? 'Running...' : 'Execute'}
+                        {isRunningCode ? "Running..." : "Execute"}
                     </span>
                 </button>
 
                 {/* Compile Button - generates and runs JavaScript code */}
                 <button
-                    onClick={() => handleRun('runCompiler')}
+                    onClick={() => handleRun("runCompiler")}
                     disabled={isRunningCode || isLoadingSample || !code.trim()}
                     title="Compile the code to JavaScript, and executes it as JavaScript"
                     className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm 
@@ -238,7 +238,7 @@ export default function PlaygroundPage() {
                         className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 
                         rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent"
                     >
-                        {isRunningCode ? 'Running...' : 'Compile'}
+                        {isRunningCode ? "Running..." : "Compile"}
                     </span>
                 </button>
             </div>
@@ -271,5 +271,5 @@ export default function PlaygroundPage() {
                 </motion.pre>
             )}
         </>
-    )
+    );
 }

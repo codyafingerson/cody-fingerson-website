@@ -20,8 +20,8 @@ export default function InterpreterPage() {
                 <h2 className="text-2xl font-bold mb-4">Program Structure</h2>
                 <p className="mb-4">
                     A Cosmo program consists of a series of <em>declarations</em>. Declarations include variables,
-                    functions, and statements. Programs are structured using blocks, which are enclosed in curly braces{' '}
-                    <span className="font-mono">{'{}'}</span>.
+                    functions, and statements. Programs are structured using blocks, which are enclosed in curly braces{" "}
+                    <span className="font-mono">{"{}"}</span>.
                 </p>
                 <hr className="border-gray-300 dark:border-gray-600 mb-6" />
             </section>
@@ -145,7 +145,7 @@ export default function InterpreterPage() {
                         <p>
                             - Use <span className="font-mono">or</span>, <span className="font-mono">and</span> for
                             combining boolean expressions.
-                            <br />- Use <span className="font-mono">{'!'}</span> or{' '}
+                            <br />- Use <span className="font-mono">{"!"}</span> or{" "}
                             <span className="font-mono">not</span> for negation.
                         </p>
                         <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded overflow-x-auto">
@@ -155,9 +155,9 @@ export default function InterpreterPage() {
                     <li>
                         <p className="font-semibold">Comparison Operators</p>
                         <p>
-                            - Use <span className="font-mono">==</span>, <span className="font-mono">!=</span>,{' '}
-                            <span className="font-mono">{'>'}</span>, <span className="font-mono">{'>='}</span>,{' '}
-                            <span className="font-mono">{'<'}</span>, and <span className="font-mono">{'<='}</span>.
+                            - Use <span className="font-mono">==</span>, <span className="font-mono">!=</span>,{" "}
+                            <span className="font-mono">{">"}</span>, <span className="font-mono">{">="}</span>,{" "}
+                            <span className="font-mono">{"<"}</span>, and <span className="font-mono">{"<="}</span>.
                         </p>
                         <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded overflow-x-auto">
                             <code>{`if (x != y) { ... }`}</code>
@@ -166,8 +166,8 @@ export default function InterpreterPage() {
                     <li>
                         <p className="font-semibold">Arithmetic Operators</p>
                         <p>
-                            - Use <span className="font-mono">+</span>, <span className="font-mono">-</span>,{' '}
-                            <span className="font-mono">*</span>, <span className="font-mono">/</span>, and{' '}
+                            - Use <span className="font-mono">+</span>, <span className="font-mono">-</span>,{" "}
+                            <span className="font-mono">*</span>, <span className="font-mono">/</span>, and{" "}
                             <span className="font-mono">%</span>.
                         </p>
                         <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded overflow-x-auto">
@@ -177,7 +177,7 @@ export default function InterpreterPage() {
                     <li>
                         <p className="font-semibold">Unary Operators</p>
                         <p>
-                            - Use <span className="font-mono">-x</span>, <span className="font-mono">!x</span>, or{' '}
+                            - Use <span className="font-mono">-x</span>, <span className="font-mono">!x</span>, or{" "}
                             <span className="font-mono">not x</span>.
                         </p>
                         <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded overflow-x-auto">
@@ -223,14 +223,14 @@ export default function InterpreterPage() {
                         </pre>
                     </li>
                     <li>
-                        <strong>Booleans:</strong> Use <span className="font-mono">true</span> or{' '}
+                        <strong>Booleans:</strong> Use <span className="font-mono">true</span> or{" "}
                         <span className="font-mono">false</span>.
                     </li>
                     <li>
                         <strong>Null:</strong> Represents "no value".
                     </li>
                     <li>
-                        <strong>Reserved Keywords:</strong>{' '}
+                        <strong>Reserved Keywords:</strong>{" "}
                         <span className="font-mono">
                             create, func, return, if, else, while, for, output, true, false, null, and, or, not
                         </span>
@@ -255,7 +255,7 @@ export default function InterpreterPage() {
                             <strong>Returns:</strong> A number.
                         </p>
                         <p>
-                            <strong>Errors:</strong> Throws if either <span className="font-mono">a</span> or{' '}
+                            <strong>Errors:</strong> Throws if either <span className="font-mono">a</span> or{" "}
                             <span className="font-mono">b</span> is not a number.
                         </p>
                         <p>
@@ -425,5 +425,5 @@ output(typeof(val)); // Outputs: "Number"`}</code>
                 </div>
             </section>
         </div>
-    )
+    );
 }

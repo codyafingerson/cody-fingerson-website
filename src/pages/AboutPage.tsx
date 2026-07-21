@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
-import headshot from '../assets/headshot.jpg' // adjust to match your path
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import headshot from "../assets/headshot.jpg"; // adjust to match your path
 
 export default function AboutPage() {
     return (
@@ -36,20 +36,22 @@ export default function AboutPage() {
                         technology.
                     </p>
                     <p>
-                        Before diving deep into software engineering, I worked in healthcare as a pharmacy technician and 
-                        gained hands-on experience in electromechanical work. Those roles heavily shaped my detail-oriented 
-                        approach to both people and complex systems. Since then, my tech journey has spanned a wide variety 
-                        of projects: I've developed internal QCL lab calibration tools for <strong>Wavelength Electronics</strong>, 
-                        built software for a local non-profit, and even designed a quirky toy programming language called <strong>Cosmo</strong> 
+                        Before diving deep into software engineering, I worked in healthcare as a pharmacy technician
+                        and gained hands-on experience in electromechanical work. Those roles heavily shaped my
+                        detail-oriented approach to both people and complex systems. Since then, my tech journey has
+                        spanned a wide variety of projects: I've developed internal QCL lab calibration tools for{" "}
+                        <strong>Wavelength Electronics</strong>, built software for a local non-profit, and even
+                        designed a quirky toy programming language called <strong>Cosmo</strong>
                         just for the fun (and chaos) of it.
                     </p>
                     <p>
-                        I thrive on finding structure in complexity. While my technical toolkit includes Node.js, Spring Boot, React, Vue, Express, and WPF, 
-                        what truly drives me isn't the tech stack — it's the challenge of designing systems that are both 
-                        highly efficient and incredibly maintainable.
+                        I thrive on finding structure in complexity. While my technical toolkit includes Node.js, Spring
+                        Boot, React, Vue, Express, and WPF, what truly drives me isn't the tech stack — it's the
+                        challenge of designing systems that are both highly efficient and incredibly maintainable.
                     </p>
                     <p>
-                        When I'm away from the keyboard, you'll usually find me snapping photos, or hanging out with my partner and our dog.
+                        When I'm away from the keyboard, you'll usually find me snapping photos, or hanging out with my
+                        partner and our dog.
                     </p>
                     <p>
                         Curious about my work or interested in collaborating?
@@ -60,5 +62,5 @@ export default function AboutPage() {
                 </div>
             </section>
         </motion.main>
-    )
+    );
 }
