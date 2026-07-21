@@ -1,4 +1,4 @@
-import { TokenType, Token } from "./Token";
+import { Token, TokenType } from "./Token";
 
 /**
  * A scanner utility that reads the source code and converts it into a list of tokens.

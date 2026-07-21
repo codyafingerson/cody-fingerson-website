@@ -6,8 +6,8 @@ import { IfStatement } from "./IfStatement";
 import { OutputStatement } from "./OutputStatement";
 import { ReturnStatement } from "./ReturnStatement";
 import { Statement } from "./Statement";
+import type { StatementVisitor } from "./StatementVisitor";
 import { WhileStatement } from "./WhileStatement";
-import { StatementVisitor } from "./StatementVisitor";
 
 export {
     BlockStatement,
@@ -18,6 +18,6 @@ export {
     OutputStatement,
     ReturnStatement,
     Statement,
-    WhileStatement,
     type StatementVisitor,
+    WhileStatement,
 };

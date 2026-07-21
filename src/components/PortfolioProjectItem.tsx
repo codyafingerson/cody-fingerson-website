@@ -1,4 +1,4 @@
-import { ReactNode, useState, useEffect } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 
 interface ProjectItemProps {

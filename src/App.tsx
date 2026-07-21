@@ -1,21 +1,19 @@
-import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-
+import { Route, Routes, useLocation } from "react-router-dom";
+import Footer from "./components/Footer";
+import InterpreterLayout from "./components/InterpreterLayout";
+/* -- Global Components -- */
+import Navbar from "./components/Navbar";
+import AboutPage from "./pages/AboutPage";
+import CatchAllPage from "./pages/CatchAllPage";
+import ContactPage from "./pages/ContactPage";
 /* -- Pages -- */
 import HomePage from "./pages/HomePage";
-import AboutPage from "./pages/AboutPage";
-import ProjectsPage from "./pages/ProjectsPage";
-import ContactPage from "./pages/ContactPage";
-import CatchAllPage from "./pages/CatchAllPage";
+import InterpreterPage from "./pages/Interpreter/InterpreterPage";
 import PlaygroundPage from "./pages/Interpreter/PlaygroundPage";
 import SettingsPage from "./pages/Interpreter/SettingsPage";
 import PortfolioPage from "./pages/Portfolio/PortfolioPage";
-
-/* -- Global Components -- */
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import InterpreterPage from "./pages/Interpreter/InterpreterPage";
-import InterpreterLayout from "./components/InterpreterLayout";
+import ProjectsPage from "./pages/ProjectsPage";
 
 export default function App() {
     const location = useLocation();

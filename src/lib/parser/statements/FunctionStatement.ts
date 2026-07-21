@@ -1,6 +1,6 @@
-import { Token } from "../../scanner/Token";
+import type { Token } from "../../scanner/Token";
 import { Statement } from "./Statement";
-import { StatementVisitor } from "./StatementVisitor";
+import type { StatementVisitor } from "./StatementVisitor";
 
 export class FunctionStatement extends Statement {
     readonly name: Token;

@@ -1,5 +1,5 @@
 import { Expression } from "./Expression";
-import { ExpressionVisitor } from "./ExpressionVisitor";
+import type { ExpressionVisitor } from "./ExpressionVisitor";
 
 export class Literal extends Expression {
     readonly value: string | number | boolean | null | unknown;

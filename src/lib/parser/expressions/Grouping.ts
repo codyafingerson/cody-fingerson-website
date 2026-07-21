@@ -1,5 +1,5 @@
 import { Expression } from "./Expression";
-import { ExpressionVisitor } from "./ExpressionVisitor";
+import type { ExpressionVisitor } from "./ExpressionVisitor";
 
 export class Grouping extends Expression {
     readonly expression: Expression;

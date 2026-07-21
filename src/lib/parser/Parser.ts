@@ -1,8 +1,7 @@
-import { Token, TokenType } from "../scanner/Token";
+import { type Token, TokenType } from "../scanner/Token";
+import { Assign, Binary, Call, type Expression, Grouping, Literal, Logical, Unary, Variable } from "./expressions";
 import { ParseError } from "./ParseError";
-import { Expression, Assign, Binary, Call, Grouping, Literal, Logical, Unary, Variable } from "./expressions";
 import {
-    Statement,
     BlockStatement,
     CreateStatement,
     ExpressionStatement,
@@ -10,6 +9,7 @@ import {
     IfStatement,
     OutputStatement,
     ReturnStatement,
+    type Statement,
     WhileStatement,
 } from "./statements";
 

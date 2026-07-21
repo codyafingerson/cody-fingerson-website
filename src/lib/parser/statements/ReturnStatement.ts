@@ -1,7 +1,7 @@
-import { Token } from "../../scanner/Token";
-import { Expression } from "../expressions/Expression";
+import type { Token } from "../../scanner/Token";
+import type { Expression } from "../expressions/Expression";
 import { Statement } from "./Statement";
-import { StatementVisitor } from "./StatementVisitor";
+import type { StatementVisitor } from "./StatementVisitor";
 
 export class ReturnStatement extends Statement {
     readonly keyword: Token;

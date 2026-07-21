@@ -1,7 +1,7 @@
-import { Callable } from "./Callable";
-import { RuntimeError } from "./RuntimeError";
-import type { Interpreter } from "./Interpreter";
 import type { Token } from "../scanner/Token";
+import { Callable } from "./Callable";
+import type { Interpreter } from "./Interpreter";
+import { RuntimeError } from "./RuntimeError";
 
 /**
  * Abstract base class for native functions provided by the interpreter.

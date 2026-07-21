@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { Project, projects } from "../data/projects";
 import ProjectCard from "../components/ProjectCard";
+import { type Project, projects } from "../data/projects";
 
 export default function ProjectsPage() {
     return (

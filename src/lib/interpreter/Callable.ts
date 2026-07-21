@@ -1,4 +1,4 @@
-import { Interpreter } from "./Interpreter";
+import type { Interpreter } from "./Interpreter";
 
 export abstract class Callable {
     abstract arity(): number;

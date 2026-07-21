@@ -1,11 +1,11 @@
-import { Assign } from "./Assign";
-import { Binary } from "./Binary";
-import { Call } from "./Call";
-import { Grouping } from "./Grouping";
-import { Literal } from "./Literal";
-import { Logical } from "./Logical";
-import { Unary } from "./Unary";
-import { Variable } from "./Variable";
+import type { Assign } from "./Assign";
+import type { Binary } from "./Binary";
+import type { Call } from "./Call";
+import type { Grouping } from "./Grouping";
+import type { Literal } from "./Literal";
+import type { Logical } from "./Logical";
+import type { Unary } from "./Unary";
+import type { Variable } from "./Variable";
 
 export interface ExpressionVisitor<R> {
     visitAssignExpression(expr: Assign): R;

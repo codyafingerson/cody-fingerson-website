@@ -1,6 +1,6 @@
-import { Token } from "../../scanner/Token";
+import type { Token } from "../../scanner/Token";
 import { Expression } from "./Expression";
-import { ExpressionVisitor } from "./ExpressionVisitor";
+import type { ExpressionVisitor } from "./ExpressionVisitor";
 
 export class Assign extends Expression {
     readonly name: Token;

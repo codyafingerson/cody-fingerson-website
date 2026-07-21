@@ -1,9 +1,9 @@
-import { useState, useCallback } from "react";
+import { motion } from "framer-motion";
+import { useCallback, useState } from "react";
+import { FaExclamationCircle, FaInfoCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import CodeEditor from "../../components/CodeEditor";
 import { CodeProcessor } from "../../utils/codeProcessor";
-import { FaInfoCircle, FaExclamationCircle } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 
 /**
  * Renders a playground where users can write code and perform actions:

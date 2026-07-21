@@ -1,4 +1,5 @@
-import React, { createContext, useState, ReactNode, useEffect } from "react";
+import type React from "react";
+import { createContext, type ReactNode, useEffect, useState } from "react";
 
 // Define a type for the available theme keys.
 export type ThemeKey = "vscode-dark" | "vscode-light" | "dracula";

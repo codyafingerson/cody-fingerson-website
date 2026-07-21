@@ -1,4 +1,4 @@
-import { StatementVisitor } from "./StatementVisitor";
+import type { StatementVisitor } from "./StatementVisitor";
 
 export abstract class Statement {
     abstract accept<R>(visitor: StatementVisitor<R>): R;

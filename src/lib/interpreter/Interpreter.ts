@@ -1,19 +1,16 @@
-import { Token, TokenType } from "../scanner/Token";
-import {
-    ExpressionVisitor,
-    Expression,
+import type {
     Assign,
     Binary,
     Call,
+    Expression,
+    ExpressionVisitor,
     Grouping,
     Literal,
     Logical,
     Unary,
     Variable,
 } from "../parser/expressions";
-import {
-    StatementVisitor,
-    Statement,
+import type {
     BlockStatement,
     CreateStatement,
     ExpressionStatement,
@@ -21,21 +18,24 @@ import {
     IfStatement,
     OutputStatement,
     ReturnStatement,
+    Statement,
+    StatementVisitor,
     WhileStatement,
 } from "../parser/statements";
+import { type Token, TokenType } from "../scanner/Token";
 import { Callable } from "./Callable";
 import { Environment } from "./Environment";
 import { FunctionObject } from "./FunctionObject";
 import { ReturnException } from "./ReturnException";
 import { RuntimeError } from "./RuntimeError";
 import {
+    AbsoluteFunction,
     AddFunction,
-    SquareRootFunction,
     ClockFunction,
     RandomFunction,
-    AbsoluteFunction,
-    SubstringFunction,
+    SquareRootFunction,
     StringLengthFunction,
+    SubstringFunction,
     TypeOfFunction,
 } from "./StandardLib";
 

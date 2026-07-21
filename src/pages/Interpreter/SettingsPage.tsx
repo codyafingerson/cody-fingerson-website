@@ -1,5 +1,5 @@
-import { ChangeEvent, useContext, useState } from "react";
-import { CodeEditorThemeContext, ThemeKey } from "../../context/CodeEditorThemeContext";
+import { type ChangeEvent, useContext, useState } from "react";
+import { CodeEditorThemeContext, type ThemeKey } from "../../context/CodeEditorThemeContext";
 
 /**
  * Renders a settings page where users can select the code editor theme and font size.

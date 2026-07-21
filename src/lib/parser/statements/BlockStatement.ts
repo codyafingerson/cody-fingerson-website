@@ -1,5 +1,5 @@
 import { Statement } from "./Statement";
-import { StatementVisitor } from "./StatementVisitor";
+import type { StatementVisitor } from "./StatementVisitor";
 
 export class BlockStatement extends Statement {
     readonly statements: Statement[];

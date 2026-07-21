@@ -1,5 +1,5 @@
-import { Callable } from "./Callable";
 import type { FunctionStatement } from "../parser/statements";
+import { Callable } from "./Callable";
 import { Environment } from "./Environment";
 import type { Interpreter } from "./Interpreter";
 import { ReturnException } from "./ReturnException";

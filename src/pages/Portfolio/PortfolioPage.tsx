@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
-import PortfolioProjectItem, { ProjectSection, ProjectImage } from "../../components/PortfolioProjectItem";
-import { FaArrowUp, FaShare, FaCheck, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { useEffect, useRef, useState } from "react";
+import { FaArrowUp, FaCheck, FaChevronDown, FaChevronUp, FaShare } from "react-icons/fa";
+import PortfolioProjectItem, { ProjectImage, ProjectSection } from "../../components/PortfolioProjectItem";
 
 type ProjectCategory = "All" | "UX Design" | "Engineering" | "Analytics";
 

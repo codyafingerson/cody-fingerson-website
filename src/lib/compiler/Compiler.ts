@@ -1,20 +1,27 @@
-import { Assign, Binary, Call, Grouping, Literal, Logical, Unary, Variable } from "../parser/expressions";
-
+import {
+    type Assign,
+    type Binary,
+    type Call,
+    type Expression,
+    type ExpressionVisitor,
+    type Grouping,
+    type Literal,
+    type Logical,
+    type Unary,
+    Variable,
+} from "../parser/expressions";
 import {
     BlockStatement,
-    CreateStatement,
-    ExpressionStatement,
-    FunctionStatement,
-    IfStatement,
-    OutputStatement,
-    ReturnStatement,
-    WhileStatement,
+    type CreateStatement,
+    type ExpressionStatement,
+    type FunctionStatement,
+    type IfStatement,
+    type OutputStatement,
+    type ReturnStatement,
+    type Statement,
+    type StatementVisitor,
+    type WhileStatement,
 } from "../parser/statements";
-
-import { ExpressionVisitor } from "../parser/expressions";
-import { StatementVisitor } from "../parser/statements";
-import { Statement } from "../parser/statements";
-import { Expression } from "../parser/expressions";
 import { TokenType } from "../scanner/Token";
 
 export class JavaScriptCompiler implements ExpressionVisitor<string>, StatementVisitor<string> {

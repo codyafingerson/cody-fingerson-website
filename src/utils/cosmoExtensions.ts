@@ -107,7 +107,7 @@ const cosmoLanguage = StreamLanguage.define<{ inComment: boolean }>({
  */
 function customCompletion(context: any) {
     // Match the word before the cursor
-    let word = context.matchBefore(/\w*/);
+    const word = context.matchBefore(/\w*/);
 
     // If no word is found or the completion is not explicitly requested for an empty match, return null
     if (!word || (word.from === word.to && !context.explicit)) return null;

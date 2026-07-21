@@ -1,6 +1,6 @@
-import { Expression } from "../expressions/Expression";
+import type { Expression } from "../expressions/Expression";
 import { Statement } from "./Statement";
-import { StatementVisitor } from "./StatementVisitor";
+import type { StatementVisitor } from "./StatementVisitor";
 
 export class IfStatement extends Statement {
     readonly condition: Expression;

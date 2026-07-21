@@ -1,10 +1,10 @@
-import { useContext } from "react";
-import ReactCodeMirror from "@uiw/react-codemirror";
 import { EditorView } from "@codemirror/view";
 import { dracula } from "@uiw/codemirror-theme-dracula";
 import { vscodeDark, vscodeLight } from "@uiw/codemirror-theme-vscode";
+import ReactCodeMirror from "@uiw/react-codemirror";
+import { useContext } from "react";
+import { CodeEditorThemeContext, type ThemeKey } from "../context/CodeEditorThemeContext";
 import cosmoExtension from "../utils/cosmoExtensions";
-import { CodeEditorThemeContext, ThemeKey } from "../context/CodeEditorThemeContext";
 
 interface CodeEditorProps {
     value: string;
