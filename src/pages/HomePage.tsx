@@ -1,32 +1,32 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-const languages = ["Java", "TypeScript", "JavaScript", "Python", "Bash", "HTML", "CSS", "C", "C#"];
+const languages = ["TypeScript", "Java", "Python", "C#", "JavaScript", "SQL", "Bash", "C", "HTML", "CSS", "R"];
 
-const frameworksAndLibs = [
-    "React",
-    "Node.js",
-    "HTMX",
-    "Express",
-    "Spring Boot",
-    "Vue",
-    "Next.js",
-    "WPF",
-    "TailwindCSS",
-];
+const frameworksAndLibs = ["React", "Next.js", "Spring Boot", "Node.js", "Express", "Vue", "WPF", "TailwindCSS"];
 
-const toolsAndTech = [
-    "Docker",
-    "Git",
-    "MongoDB",
+const dataAndInfrastructure = [
     "PostgreSQL",
-    "Redis",
-    "MySQL",
+    "MongoDB",
+    "Docker",
     "GitHub Actions",
-    "Jest",
-    "JUnit",
+    "GCP",
+    "Vercel",
+    "Git",
     "Addigy MDM",
     "Google Workspace",
+];
+
+const testingAndApis = ["Playwright", "REST APIs", "Integration testing", "Jest", "JUnit"];
+
+const instrumentation = ["SCPI", "GPIB", "IVI VISA", "Calibration & test automation"];
+
+const skillCategories = [
+    { heading: "Languages", items: languages },
+    { heading: "Frameworks & Libraries", items: frameworksAndLibs },
+    { heading: "Data & Infrastructure", items: dataAndInfrastructure },
+    { heading: "Testing & APIs", items: testingAndApis },
+    { heading: "Instrumentation", items: instrumentation },
 ];
 
 const badgeStyle =
@@ -44,11 +44,12 @@ export default function HomePage() {
                 className="relative flex flex-col items-center text-center space-y-6 pt-8 md:pt-12"
             >
                 <h1 className="text-5xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                    Welcome to my website!
+                    Cody Fingerson
                 </h1>
                 <p className="max-w-2xl text-lg dark:text-gray-300">
-                    I'm a developer with a passion for solving real-world problems through code. Explore my projects,
-                    learn more about my journey from healthcare to tech, and see what I’ve been building.
+                    I'm a software engineer with a B.S. in Computer Science who builds internal tools, integrations, and
+                    automation in TypeScript, Python, Java, and C#. Explore my projects, learn more about my journey
+                    from healthcare to tech, and see what I've been building.
                 </p>
                 <Link
                     to="/projects"
@@ -70,43 +71,18 @@ export default function HomePage() {
                     Technologies I Work With
                 </h2>
 
-                {/* Languages Category */}
-                <div className="mb-10">
-                    <h3 className="text-xl font-semibold text-center mb-5 dark:text-gray-300">Languages</h3>
-                    <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-                        {languages.map((tech) => (
-                            <span key={tech} className={badgeStyle}>
-                                {tech}
-                            </span>
-                        ))}
+                {skillCategories.map(({ heading, items }, index) => (
+                    <div key={heading} className={index === skillCategories.length - 1 ? "" : "mb-10"}>
+                        <h3 className="text-xl font-semibold text-center mb-5 dark:text-gray-300">{heading}</h3>
+                        <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+                            {items.map((tech) => (
+                                <span key={tech} className={badgeStyle}>
+                                    {tech}
+                                </span>
+                            ))}
+                        </div>
                     </div>
-                </div>
-
-                {/* Frameworks & Libraries Category */}
-                <div className="mb-10">
-                    <h3 className="text-xl font-semibold text-center mb-5 dark:text-gray-300">
-                        Frameworks & Libraries
-                    </h3>
-                    <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-                        {frameworksAndLibs.map((tech) => (
-                            <span key={tech} className={badgeStyle}>
-                                {tech}
-                            </span>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Tools & Technologies Category */}
-                <div>
-                    <h3 className="text-xl font-semibold text-center mb-5 dark:text-gray-300">Tools & Technologies</h3>
-                    <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-                        {toolsAndTech.map((tech) => (
-                            <span key={tech} className={badgeStyle}>
-                                {tech}
-                            </span>
-                        ))}
-                    </div>
-                </div>
+                ))}
             </motion.section>
         </div>
     );

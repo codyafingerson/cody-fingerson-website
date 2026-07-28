@@ -263,10 +263,10 @@ export default function PortfolioPage() {
                     <h1 className="text-4xl font-bold dark:text-white">Cody Fingerson</h1>
 
                     <p className="text-lg text-gray-800 dark:text-gray-300">
-                        I'm a senior Computer Science student at Montana State University and a backend-focused engineer
-                        who cares a lot about clarity, reliability, and thoughtful user experience. I blend strong
-                        backend architecture with interface design and UX research to build tools that feel fast,
-                        intuitive, and grounded in real user needs.
+                        I'm a software engineer with a B.S. in Computer Science from Montana State University who cares
+                        a lot about clarity, reliability, and thoughtful user experience. I blend strong backend
+                        architecture with interface design and UX research to build tools that feel fast, intuitive, and
+                        grounded in real user needs.
                     </p>
                 </section>
 
@@ -286,6 +286,7 @@ export default function PortfolioPage() {
                                 <li>React and TypeScript, component-driven UI development</li>
                                 <li>Backend engineering with Java, Spring Boot, Node, and Express</li>
                                 <li>REST API design, systems thinking, and maintainable architecture</li>
+                                <li>Integration and end-to-end testing with Playwright</li>
                                 <li>Data analysis and tooling using Python, NumPy, Pandas, and Matplotlib</li>
                             </ul>
                         </div>
@@ -295,8 +296,8 @@ export default function PortfolioPage() {
                             <h3 className="font-semibold mb-2 dark:text-gray-200">Tools & Technologies</h3>
                             <ul className="list-disc list-inside space-y-1 text-gray-800 dark:text-gray-300">
                                 <li>Figma, Frame0, and rapid UI prototyping workflows</li>
-                                <li>Docker, Git, GitHub Actions, VS Code, JetBrains IDEs</li>
-                                <li>PostgreSQL, MongoDB, Redis, MySQL</li>
+                                <li>Docker, Git, GitHub Actions, GCP, Vercel, VS Code, JetBrains IDEs</li>
+                                <li>PostgreSQL and MongoDB</li>
                                 <li>WPF and C# for desktop tools and internal engineering applications</li>
                                 <li>R, RStudio, and ggplot2 for stats-oriented coursework</li>
                             </ul>
