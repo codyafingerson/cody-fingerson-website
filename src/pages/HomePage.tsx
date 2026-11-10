@@ -5,6 +5,8 @@ const languages = ["TypeScript", "Java", "Python", "C#", "JavaScript", "SQL", "B
 
 const frameworksAndLibs = ["React", "Next.js", "Spring Boot", "Node.js", "Express", "Vue", "WPF", "TailwindCSS"];
 
+const ormsAndDataAccess = ["Prisma", "Drizzle ORM"];
+
 const dataAndInfrastructure = [
     "PostgreSQL",
     "MongoDB",
@@ -24,6 +26,7 @@ const instrumentation = ["SCPI", "GPIB", "IVI VISA", "Calibration & test automat
 const skillCategories = [
     { heading: "Languages", items: languages },
     { heading: "Frameworks & Libraries", items: frameworksAndLibs },
+    { heading: "ORMs & Data Access", items: ormsAndDataAccess },
     { heading: "Data & Infrastructure", items: dataAndInfrastructure },
     { heading: "Testing & APIs", items: testingAndApis },
     { heading: "Instrumentation", items: instrumentation },
