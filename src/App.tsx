@@ -16,6 +16,7 @@ import PlaygroundPage from "./pages/Interpreter/PlaygroundPage";
 import SettingsPage from "./pages/Interpreter/SettingsPage";
 import PortfolioPage from "./pages/Portfolio/PortfolioPage";
 import ProjectsPage from "./pages/ProjectsPage";
+import RiskpanePage from "./pages/RiskpanePage";
 import UpdatesPage from "./pages/UpdatesPage";
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
                         <Route path="/" element={<HomePage />} />
                         <Route path="/about" element={<AboutPage />} />
                         <Route path="/projects" element={<ProjectsPage />} />
+                        <Route path="/projects/riskpane" element={<RiskpanePage />} />
                         <Route path="/contact" element={<ContactPage />} />
                         <Route path="/interpreter" element={<InterpreterLayout />}>
                             <Route index element={<InterpreterPage />} />
