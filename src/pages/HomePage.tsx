@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-const languages = ["TypeScript", "Java", "Python", "C#", "JavaScript", "SQL", "Bash", "C", "HTML", "CSS", "R"];
+const languages = ["TypeScript", "Java", "Python", "C#", "JavaScript", "SQL", "Bash"];
 
-const frameworksAndLibs = ["React", "Next.js", "Spring Boot", "Node.js", "Express", "Vue", "WPF", "TailwindCSS"];
+const frameworksAndLibs = ["React", "Next.js", "Spring Boot", "Node.js", "Express", "Vue", "Redux", "Flask"];
 
 const ormsAndDataAccess = ["Prisma", "Drizzle ORM"];
 
@@ -21,7 +21,7 @@ const dataAndInfrastructure = [
 
 const testingAndApis = ["Playwright", "REST APIs", "Integration testing", "Jest", "JUnit"];
 
-const instrumentation = ["SCPI", "GPIB", "IVI VISA", "Calibration & test automation"];
+const apisTestingAndHardware = ["Playwright", "REST APIs", "SCPI", "GPIB", "IVI VISA", "Test automation"];
 
 const skillCategories = [
     { heading: "Languages", items: languages },
