@@ -8,6 +8,7 @@ export interface Project {
     technologies: string[];
     sourceCode?: string;
     liveDemo?: string;
+    architecture?: string;
 }
 
 /**
@@ -21,6 +22,7 @@ export const projects: Array<Project> = [
             "Riskpane is a software governance platform for assessing vendor risk, managing approvals, and maintaining auditable compliance records. I designed a role-based access model with custom roles, permissions, and org-scoped assignments, to separate reviewer, approver, and admin capabilities across multi-tenant organizations, and implemented authentication with Better Auth (passkeys, two-factor, session management) alongside an insert-only audit log that captures actor, action, and target for every review decision. It's deployed on Vercel with a GitHub Actions pipeline running Playwright end-to-end tests, integration tests, and Postgres migrations on every push. \n\n Please contact me for a demo if you're interested in seeing Riskpane in action!",
         technologies: ["TypeScript", "React", "Next.js", "PostgreSQL", "Docker", "Playwright"],
         liveDemo: "https://app.riskpane.com",
+        architecture: "/projects/riskpane",
     },
     {
         id: 2,
@@ -59,5 +61,5 @@ export const projects: Array<Project> = [
         description:
             "An internal ticket processing tool designed to streamline performance analysis by ingesting CSV files containing ticket data. The software parses and processes key metrics—such as response times, resolution durations, and ticket volume—and calculates a variety of statistical averages and trends. Built with a focus on automation, accuracy, and usability to reduce manual reporting overhead.",
         technologies: ["Python", "Pandas", "NumPy", "Matplotlib", "PyQT6"],
-    }
+    },
 ];
