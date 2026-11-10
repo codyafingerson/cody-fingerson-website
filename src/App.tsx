@@ -1,4 +1,5 @@
 import { AnimatePresence } from "framer-motion";
+import { Analytics } from "@vercel/analytics/next"
 import { Route, Routes, useLocation } from "react-router-dom";
 import Footer from "./components/Footer";
 import InterpreterLayout from "./components/InterpreterLayout";
@@ -46,6 +47,7 @@ export default function App() {
                 </AnimatePresence>
             </main>
             <Footer />
+            <Analytics />
         </div>
     );
 }
