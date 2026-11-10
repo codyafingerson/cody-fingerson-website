@@ -5,15 +5,31 @@ const languages = ["TypeScript", "Java", "Python", "C#", "JavaScript", "SQL", "B
 
 const frameworksAndLibs = ["React", "Next.js", "Spring Boot", "Node.js", "Express", "Vue", "Redux", "Flask"];
 
-const dataAndInfrastructure = ["PostgreSQL", "MongoDB", "Docker", "GitHub Actions", "AWS", "GCP", "Vercel"];
+const ormsAndDataAccess = ["Prisma", "Drizzle ORM"];
+
+const dataAndInfrastructure = [
+    "PostgreSQL",
+    "MongoDB",
+    "Docker",
+    "GitHub Actions",
+    "GCP",
+    "Vercel",
+    "Git",
+    "Addigy MDM",
+    "Google Workspace",
+];
+
+const testingAndApis = ["Playwright", "REST APIs", "Integration testing", "Jest", "JUnit"];
 
 const apisTestingAndHardware = ["Playwright", "REST APIs", "SCPI", "GPIB", "IVI VISA", "Test automation"];
 
 const skillCategories = [
     { heading: "Languages", items: languages },
     { heading: "Frameworks & Libraries", items: frameworksAndLibs },
-    { heading: "Data, Cloud & CI/CD", items: dataAndInfrastructure },
-    { heading: "APIs, Testing & Hardware", items: apisTestingAndHardware },
+    { heading: "ORMs & Data Access", items: ormsAndDataAccess },
+    { heading: "Data & Infrastructure", items: dataAndInfrastructure },
+    { heading: "Testing & APIs", items: testingAndApis },
+    { heading: "Instrumentation", items: instrumentation },
 ];
 
 const badgeStyle =
